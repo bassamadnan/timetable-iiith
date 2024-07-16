@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* absolute shitshow */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.navbar {
+  background-color: #1f2937;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.navbar button:hover {
+  opacity: 0.8;
+}
+.homepage {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 64px);
+}
+
+.timetable {
+  height: 50%;
+  overflow-y: auto;
+}
+
+.course-management {
+  display: flex;
+  height: 50%;
+}
+
+.course-selection, .conflicting-courses {
+  /* width: 50%; */
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.timetable-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-header, .grid-row {
+  display: flex;
+}
+
+.header-cell, .day-cell, .grid-cell {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  text-align: center;
+}
+
+.header-cell, .day-cell {
+  font-weight: bold;
+  background-color: #e5e7eb;
+}
+
+.day-cell {
+  width: 100px;
+}
+
+.grid-cell {
+  min-height: 50px;
+}
+
+.course-item {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.conflicting-course {
+  background-color: #fecaca;
+  color: #dc2626;
+}
+.grid-cell {
+  position: relative;
+  min-height: 80px;
+}
+
+.selected-course {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e0f2f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  overflow: hidden;
+}
+
+.course-name {
+  font-size: 0.8rem;
+  text-align: center;
+  word-break: break-word;
+}
+.homepage {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 64px); 
+}
+
+.timetable {
+  height: 50%;
+  overflow-y: auto;
+}
+
+.course-management {
+  display: flex;
+  height: 50%;
+  width: 100%;
+}
+
+.course-selection-container, .conflicting-courses {
+  width: 50%;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+}
+
+.course-selection, .course-list {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+/* Ensure that the content doesn't overflow the fixed width */
+.course-item {
+  width: 100%;
+  box-sizing: border-box;
+}

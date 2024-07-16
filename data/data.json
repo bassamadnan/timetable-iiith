@@ -1,0 +1,140 @@
+{
+  "Monday": {
+    "T1": [
+      "CS4.405 - Data Analytics I",
+      "CE1.607 - Earthquake Resistant Design of Masonry Structures",
+      "MA6.102 - Probability and Random Processes",
+      "M24Temp2 - Thinking and Knowing in the Human Sciences - III",
+      "M24Temp3 - CMOS References and Regulators",
+      "M24Temp7 - Blockchain and Web3 Development"
+    ],
+    "T2": [
+      "CS3.301 - Operating Systems and Networks",
+      "SC3.101 - Introduction to Biology",
+      "CS6.302 - Software Systems Development",
+      "CE1.501 - Structural Dynamics",
+      "SC1.421 - Introduction to Quantum Field Theory",
+      "EC5.201 - Signal Processing",
+      "SC2.401 - Topics in Nanosciences",
+      "M24Temp5 - Retrofit of Existing Infrastructure"
+    ],
+    "T3": [
+      "SC1.110 - Science I",
+      "CS7.404 - Digital Image Processing",
+      "SC1.203 - Quantum Mechanics",
+      "CL2.203 - Language and Society",
+      "CE5.502 - Hydrological modelling and Software Development",
+      "CS9.428 - Environmental Science & Technology",
+      "CE0.501 - Theory of Elasticity",
+      "CS2.501 - Advanced Computer Architecture",
+      "CS3.401 - Distributed Systems",
+      "CG3.402 - Behavioral Research: Experimental Design"
+    ],
+    "T4": [
+      "MA8.401 - Topics in Applied Optimization",
+      "SC1.310 - Open Quantum Systems and Quantum Thermodynamics",
+      "CE1.502 - Structural Engineering Design Studio",
+      "CG1.403 - Learning & Memory",
+      "M24Temp9 - Quantum Information Theory"
+    ],
+    "T5": [
+      "CS1.302 - Automata Theory",
+      "EC5.407 - Wireless Communications",
+      "CS4.406 - Information Retrieval and Extraction",
+      "CS4.301 - Data and Applications",
+      "MA6.301 - MCS 1-Probability and Statistics",
+      "MA6.302 - MCS 2-Linear Algebra",
+      "SC3.202 - Bioinformatics",
+      "SC3.203 - Systems Biology",
+      "CS3.402 - Advanced Computer Networks",
+      "EC2.409 - Principles of Semiconductor Devices",
+      "EC5.410 - Information Theory",
+      "M24Temp4 - Structural Safety of Built Infrastructure",
+      "CS9.440 - Introduction to Remote Sensing"
+    ],
+    "T6": [
+      "HS2.202 - Intro to Psychology",
+      "HS5.202 - Introduction to Economics",
+      "HS1.208 - Introduction to Film Studies"
+    ]
+  },
+  "Tuesday": {
+    "T1": [
+      "CS3.304 - Advanced Operating Systems",
+      "CS0.301 - Computer Problem Solving",
+      "SC2.309 - Chemistry Topics for Engineers",
+      "SC1.415 - Physics of the early Universe",
+      "M24Temp8 - Software Quality Engineering"
+    ],
+    "T2": [
+      "CS4.408 - Spatial Informatics",
+      "CS1.301 - Algorithm Analysis & Design",
+      "CL3.202 - Computational Linguistics II: Comp Semantics and Discourse parsing",
+      "EC2.407 - Design for Testability",
+      "CS1.405 - Modern Complexity Theory",
+      "SC2.304 - Spectroscopy",
+      "SC2.305 - Chemical Kinetics and Reaction Dynamics",
+      "CS7.504 - Fairness, Privacy and Ethics in AI",
+      "EC5.412 - Foundations for Signal Processing and Communication"
+    ],
+    "T3": [
+      "SC3.321 - Biomolecular Structure Interaction and Dynamics",
+      "HS0.202 - Thinking and Knowing in the Human Sciences-2",
+      "CS1.304 - Data Structures & Algorithms for Problem Solving",
+      "CE4.501 - Finite Element Methods",
+      "HS0.303 - Applied Ethics",
+      "CS1.407 - Entropy and Information",
+      "M24Temp10 - Geospatial Technology for Disaster Risk Modelling"
+    ],
+    "T4": [
+      "CS7.503 - Mobile Robotics",
+      "EC5.202 - Systems Thinking",
+      "EC5.406 - Signal Detection and Estimation Theory",
+      "CE9.609 - IoT Workshop",
+      "CS9.429 - Design for Social Innovation",
+      "CL2.405 - Speech Analysis and Linguistics",
+      "CS3.306 - Algorithms and Operating Systems",
+      "CG1.402 - Introduction to Cognitive Science",
+      "CG3.401 - Introduction to Neural and Cognitive Modelling"
+    ],
+    "T5": [
+      "CS8.501 - Research in Information Security",
+      "HS4.201 - Introduction to Politics",
+      "HS0.214 - Introduction to Philosophy",
+      "HS0.203a - Basics of Ethics",
+      "HS1.210 - Music Workshop",
+      "HS8.201 - Gender and Society"
+    ],
+    "T6": [
+      "CS7.403 - Statistical Methods in AI"
+    ]
+  },
+  "Wednesday": {
+    "T1": [
+      "HS3.201 - Introduction to History",
+      "HS0.203b - Basics of Ethics",
+      "PD1.301 - Design Thinking - Research to Define",
+      "PD1.401 - Design Thinking - Idea to Evaluate",
+      "HS1.303 - Readings from Hindi Literature",
+      "HS2.303 - Work, Entrepreneurship and Technology in Contemporary Societies"
+    ],
+    "T2": [
+      "CS1.402 - Principles of Programming Languages",
+      "MA6.101 - Probability and Statistics",
+      "EC4.401 - Robotics: Dynamics and Control",
+      "CS7.501 - Advanced NLP",
+      "EC2.201 - VLSI Design",
+      "CS9.501 - User Research Methods",
+      "PD2.401 - Product Management 101",
+      "CS7.601 - Deep Learning- Theory and Practices",
+      "EC5.411 - Modern Coding Theory",
+      "PD2.501 - Product Marketing"
+    ],
+    "T3": [
+      "PD1.501 - Human Computer Interaction"
+    ],
+    "T4": [],
+    "T5": [],
+    "T6": []
+  }
+}
