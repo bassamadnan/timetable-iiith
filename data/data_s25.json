@@ -7,34 +7,30 @@
         "SC4.102 - Computing in Sciences II",
         "EC2.502 - Flexible Electronics",
         "CS1.404 - Optimization Methods",
-        "CS1.403 - Compilers"
+        "CS1.403 - Compilers",
+        "HS8.101 - Making of Contemporary World",
+        "EC5.206 - Introduction to Statistical Signal Processing"
       ],
       "T2": [
-        "HS8.101 - Making of Contemporary World",
-        "EC5.206 - Introduction to Statistical Signal Processing",
         "CL1.102 - Introduction to Linguistics II",
         "CS6.301 - Design and Analysis of Software Systems",
         "EC2.204 - Intro to Processor Architecture",
         "SC2.316 - Molecular Modeling and Simulations",
-        "CS3.303 - Introduction to IoT"
-      ],
-      "T3": [
+        "CS3.303 - Introduction to IoT",
         "EC2.103 - Analog Electronic Circuits",
         "SC2.101 - General and Structural Chemistry",
         "SC2.315 - Molecular Symmetry and Quantum Mechanics",
         "SC1.308 - The Universe Across Scales",
-        "SC3.303 - Advanced Bioinformatics",
-        "GS0.301 - Introduction to Spatial Sciences"
+        "SC3.303 - Advanced Bioinformatics"
       ],
-      "T4": [
+      "T3": [
+        "GS0.301 - Introduction to Spatial Sciences",
         "CS2.201 - Computer Systems Organization",
         "EC5.203 - Communication Theory",
         "SC2.203 - Biomolecular Structures",
         "SC2.202 - Organic Chemistry",
         "CS7.401 - Introduction to NLP",
-        "EC5.102 - Information and Communication"
-      ],
-      "T5": [
+        "EC5.102 - Information and Communication",
         "CS1.406 - Advanced Algorithms",
         "CS8.401 - Principles of Information Security",
         "CS8.402 - Information Security Audit and Assurance",
@@ -45,19 +41,23 @@
         "HS2.303 - Ethnography in praxis: An investigation into Field, Scales and Theory",
         "CS1.503 - Mathematical Foundations of Data Science"
       ],
-      "T6": [
+      "T4": [
         "HS8.102 - Intro to Human Sciences",
         "CE5.501 - Design of Hydraulic Structures",
-
+        "CL2.404 - Computational Psycholinguistics",
         "MA7.501 - Continuous Variable Quantum Information Theory and Computation",
         "CG2.401 - Cognitive Neuroscience",
-        "CS1.501 - Advanced Optimization: Theory and Applications",
+        "CS1.501 - Advanced Optimization: Theory and Applications"
+      ],
+      "T5": [
         "CS7.303 - Digital Signal Analysis",
         "EC4.501 - Advances in Robotics and Control",
         "CS8.301 - Introduction to Information Security",
         "CS7.405 - Responsible & Safe AI Systems",
         "Cl3.408 - Applications of Language Models",
-        "CG3.501 - Cognitive Science and AI",
+        "CG3.501 - Cognitive Science and AI"
+      ],
+      "T6": [
         "HS0.207 - Science & Technology: Critical Perspectives",
         "HS0.217 - Ethics and the Digital Society",
         "HS0.218a - Ethics in Research",
@@ -70,20 +70,18 @@
       "T1": [
         "SC2.301 - Physics of Soft Condensed Matter",
         "SC1.204 - Thermodynamics",
-        "SC4.411 - Machine Learning for Natural Sciences",
         "SC1.205 - Statistical Mechanics",
         "CS1.305 - Introduction to Algorithms Engineering",
         "CS9.312 - Introduction to Quantum Information and Computation",
-        "HS0.302 - Research Methods in Human Sciences"
-      ],
-      "T2": [
+        "HS0.302 - Research Methods in Human Sciences",
         "CS1.201 - Data Structures and Algorithms",
         "MA2.101 - Linear Algebra",
-        "SC3.326 - Algebraic Methods in Reaction Networks",
-        "HS0.201 - Thinking and Knowing in the Human Sciences-1",
-        "GS2.503 - Spatial Data Sciences"
+        "SC4.411 - Machine Learning for Natural Sciences",
+        "SC3.326 - Algebraic Methods in Reaction Networks"
       ],
-      "T3": [
+      "T2": [
+        "HS0.201 - Thinking and Knowing in the Human Sciences-1",
+        "GS2.503 - Spatial Data Sciences",
         "SC1.101 - Electrodynamics",
         "CS3.307 - Performance modeling of computer systems",
         "CS9.311 - Introduction to Brain and Cognition",
@@ -93,25 +91,24 @@
         "CS8.403 - System and Network Security",
         "CE1.601 - Earthquake Engineering",
         "CS3.404 - Internals of Application Servers",
-        "CS1.409 - Quantum Algorithms"
-      ],
-      "T4": [
+        "CS1.409 - Quantum Algorithms",
         "CS4.401 - Data Systems",
         "EC5.408 - Speech Signal Processing",
         "CL3.409 - Evaluation Methods for NLP",
-        "CG3.403 - Behavioral Research: Statistical Methods",
-        "CL2.404 - Computational Psycholinguistics",
-        "CS0.302 - Computing Tools",
-        "MA4.303 - Linear partial differential equations and variational calculus"
+        "CG3.403 - Behavioral Research: Statistical Methods"
       ],
-      "T5": [
+      "T3": [
+        "CS0.302 - Computing Tools",
+        "MA4.303 - Linear partial differential equations and variational calculus",
         "CS1.201 - Data Structures and Algorithms",
         "MA2.101 - Linear Algebra",
         "CE8.401 - Disaster Management",
         "CS1.306 - Numerical Algorithms",
         "CL2.204 - Language Typology and Universals",
         "CS9.441 - Applied Attention Theory",
-        "CS9.433 - Hydro Informatics",
+        "CS9.433 - Hydro Informatics"
+      ],
+      "T4": [
         "SC1.111 - Science II",
         "EC4.403 - Robotics: Planning and Navigation",
         "CS6.401 - Software Engineering",
@@ -120,17 +117,19 @@
         "CL5.401 - Topics in SSMT",
         "EC2.401 - Analog IC Design",
         "CG4.401 - Music, Mind and Technology",
-        "GS1.401 - Optical Remote Sensing",
-        "HS0.204 - Introduction to Philosophy of Technology"
+        "GS1.401 - Optical Remote Sensing"
       ],
-      "T6": [
+      "T5": [
+        "HS0.204 - Introduction to Philosophy of Technology",
         "CS4.302 - Data Visualisation",
         "CS3.302 - Software Programming for Performance",
         "CE1.608 - Analysis & Design of Precast and Prestressed Structures",
         "HS8.202 - Gender, Culture and Representation",
         "HS8.303 - Environmental & Social Governance in Mineral Extraction",
         "HS0.203a - Basics of Ethics",
-        "HS0.203b - Basics of Ethics",
+        "HS0.203b - Basics of Ethics"
+      ],
+      "T6": [
         "EC4.402 - Introduction to UAV Design",
         "CS7.403 - Statistical Methods in AI",
         "CS9.424 - Technology Product Entrepreneurship"
@@ -143,7 +142,7 @@
         "HS3.305 - Migrants and Migrations in Modern South Asia",
         "PD2.502 - Product Lifecycle Management",
         "HS0.220 - Language and Power",
-        "hS0.219 - Governance of AI: Ethics and Regulation",
+        "HS0.219 - Governance of AI: Ethics and Regulation",
         "HS0.218b - Ethics in Research",
         "HS3.304 - The Gutenberg Parenthesis",
         "HS2.304 - Sociology of Platform Economies"
@@ -160,11 +159,11 @@
       ],
       "T3": [
         "OC3.102 - Value Education II",
-        "PD1.411 - Product Design Workshop",
-        "PD2.423 - Organizational Operations",
+        "PD1.411 - Product Design Workshop"
+      ],
+      "T4": [
         "PD2.423 - Organizational Operations"
       ],
-      "T4": [],
       "T5": [],
       "T6": []
     }
