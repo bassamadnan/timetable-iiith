@@ -1,3 +1,3 @@
-import courses from "../../data/data.json" with { type: "json" };
+import courses from "../../data/data_s25.json" with { type: "json" };
 
 export {courses};
