@@ -48,7 +48,7 @@
       "T6": [
         "HS8.102 - Intro to Human Sciences",
         "CE5.501 - Design of Hydraulic Structures",
-        "CL2.404 - Computational Psycholinguistics",
+
         "MA7.501 - Continuous Variable Quantum Information Theory and Computation",
         "CG2.401 - Cognitive Neuroscience",
         "CS1.501 - Advanced Optimization: Theory and Applications",
@@ -100,6 +100,7 @@
         "EC5.408 - Speech Signal Processing",
         "CL3.409 - Evaluation Methods for NLP",
         "CG3.403 - Behavioral Research: Statistical Methods",
+        "CL2.404 - Computational Psycholinguistics",
         "CS0.302 - Computing Tools",
         "MA4.303 - Linear partial differential equations and variational calculus"
       ],
