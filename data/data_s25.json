@@ -70,6 +70,7 @@
       "T1": [
         "SC2.301 - Physics of Soft Condensed Matter",
         "SC1.204 - Thermodynamics",
+        "SC4.411 - Machine Learning for Natural Sciences",
         "SC1.205 - Statistical Mechanics",
         "CS1.305 - Introduction to Algorithms Engineering",
         "CS9.312 - Introduction to Quantum Information and Computation",
@@ -78,7 +79,6 @@
       "T2": [
         "CS1.201 - Data Structures and Algorithms",
         "MA2.101 - Linear Algebra",
-        "SC4.411 - Machine Learning for Natural Sciences",
         "SC3.326 - Algebraic Methods in Reaction Networks",
         "HS0.201 - Thinking and Knowing in the Human Sciences-1",
         "GS2.503 - Spatial Data Sciences"
