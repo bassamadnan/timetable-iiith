@@ -1,170 +1,163 @@
 {
-    "Monday": {
-      "T1": [
-        "CS2.201 - Computer Systems Organization",
-        "EC5.205 - Introduction to Coding Theory",
-        "CE1.603 - Advanced Structural Analysis",
-        "SC4.102 - Computing in Sciences II",
-        "EC2.502 - Flexible Electronics",
-        "CS1.404 - Optimization Methods",
-        "CS1.403 - Compilers",
-        "HS8.101 - Making of Contemporary World",
-        "EC5.206 - Introduction to Statistical Signal Processing"
-      ],
-      "T2": [
-        "CL1.102 - Introduction to Linguistics II",
-        "CS6.301 - Design and Analysis of Software Systems",
-        "EC2.204 - Intro to Processor Architecture",
-        "SC2.316 - Molecular Modeling and Simulations",
-        "CS3.303 - Introduction to IoT",
-        "EC2.103 - Analog Electronic Circuits",
-        "SC2.101 - General and Structural Chemistry",
-        "SC2.315 - Molecular Symmetry and Quantum Mechanics",
-        "SC1.308 - The Universe Across Scales",
-        "SC3.303 - Advanced Bioinformatics"
-      ],
-      "T3": [
-        "GS0.301 - Introduction to Spatial Sciences",
-        "CS2.201 - Computer Systems Organization",
-        "EC5.203 - Communication Theory",
-        "SC2.203 - Biomolecular Structures",
-        "SC2.202 - Organic Chemistry",
-        "CS7.401 - Introduction to NLP",
-        "EC5.102 - Information and Communication",
-        "CS1.406 - Advanced Algorithms",
-        "CS8.401 - Principles of Information Security",
-        "CS8.402 - Information Security Audit and Assurance",
-        "EC5.402 - Time Frequency Analysis",
-        "CS7.603 - Topics in Reinforcement Learning",
-        "CS8.502 - Topics in Information-Theoretic Privacy",
-        "CE1.609 - Analysis and Design of Bridge Structures",
-        "HS2.303 - Ethnography in praxis: An investigation into Field, Scales and Theory",
-        "CS1.503 - Mathematical Foundations of Data Science"
-      ],
-      "T4": [
-        "HS8.102 - Intro to Human Sciences",
-        "CE5.501 - Design of Hydraulic Structures",
-        "CL2.404 - Computational Psycholinguistics",
-        "MA7.501 - Continuous Variable Quantum Information Theory and Computation",
-        "CG2.401 - Cognitive Neuroscience",
-        "CS1.501 - Advanced Optimization: Theory and Applications"
-      ],
-      "T5": [
-        "CS7.303 - Digital Signal Analysis",
-        "EC4.501 - Advances in Robotics and Control",
-        "CS8.301 - Introduction to Information Security",
-        "CS7.405 - Responsible & Safe AI Systems",
-        "Cl3.408 - Applications of Language Models",
-        "CG3.501 - Cognitive Science and AI"
-      ],
-      "T6": [
-        "HS0.207 - Science & Technology: Critical Perspectives",
-        "HS0.217 - Ethics and the Digital Society",
-        "HS0.218a - Ethics in Research",
-        "HS1.209 - Music Language Creativity",
-        "HS4.303 - Digital Democracy and Data Governance in the European Union",
-        "HS0.304 - Mind, Body and Cognition"
-      ]
-    },
-    "Tuesday": {
-      "T1": [
-        "SC2.301 - Physics of Soft Condensed Matter",
-        "SC1.204 - Thermodynamics",
-        "SC1.205 - Statistical Mechanics",
-        "CS1.305 - Introduction to Algorithms Engineering",
-        "CS9.312 - Introduction to Quantum Information and Computation",
-        "HS0.302 - Research Methods in Human Sciences",
-        "CS1.201 - Data Structures and Algorithms",
-        "MA2.101 - Linear Algebra",
-        "SC4.411 - Machine Learning for Natural Sciences",
-        "SC3.326 - Algebraic Methods in Reaction Networks"
-      ],
-      "T2": [
-        "HS0.201 - Thinking and Knowing in the Human Sciences-1",
-        "GS2.503 - Spatial Data Sciences",
-        "SC1.101 - Electrodynamics",
-        "CS3.307 - Performance modeling of computer systems",
-        "CS9.311 - Introduction to Brain and Cognition",
-        "HS7.301 - Science, Technology and Society",
-        "CL3.101 - Computational Linguistics 1",
-        "SC1.102 - Classical Mechanics",
-        "CS8.403 - System and Network Security",
-        "CE1.601 - Earthquake Engineering",
-        "CS3.404 - Internals of Application Servers",
-        "CS1.409 - Quantum Algorithms",
-        "CS4.401 - Data Systems",
-        "EC5.408 - Speech Signal Processing",
-        "CL3.409 - Evaluation Methods for NLP",
-        "CG3.403 - Behavioral Research: Statistical Methods"
-      ],
-      "T3": [
-        "CS0.302 - Computing Tools",
-        "MA4.303 - Linear partial differential equations and variational calculus",
-        "CS1.201 - Data Structures and Algorithms",
-        "MA2.101 - Linear Algebra",
-        "CE8.401 - Disaster Management",
-        "CS1.306 - Numerical Algorithms",
-        "CL2.204 - Language Typology and Universals",
-        "CS9.441 - Applied Attention Theory",
-        "CS9.433 - Hydro Informatics"
-      ],
-      "T4": [
-        "SC1.111 - Science II",
-        "EC4.403 - Robotics: Planning and Navigation",
-        "CS6.401 - Software Engineering",
-        "CS3.401 - Distributed Systems",
-        "CS1.408 - Introduction to Game Theory",
-        "CL5.401 - Topics in SSMT",
-        "EC2.401 - Analog IC Design",
-        "CG4.401 - Music, Mind and Technology",
-        "GS1.401 - Optical Remote Sensing"
-      ],
-      "T5": [
-        "HS0.204 - Introduction to Philosophy of Technology",
-        "CS4.302 - Data Visualisation",
-        "CS3.302 - Software Programming for Performance",
-        "CE1.608 - Analysis & Design of Precast and Prestressed Structures",
-        "HS8.202 - Gender, Culture and Representation",
-        "HS8.303 - Environmental & Social Governance in Mineral Extraction",
-        "HS0.203a - Basics of Ethics",
-        "HS0.203b - Basics of Ethics"
-      ],
-      "T6": [
-        "EC4.402 - Introduction to UAV Design",
-        "CS7.403 - Statistical Methods in AI",
-        "CS9.424 - Technology Product Entrepreneurship"
-      ]
-    },
-    "Wednesday": {
-      "T1": [
-        "CS6.201 - Introduction to Software Systems",
-        "CS7.302 - Computer Graphics",
-        "HS3.305 - Migrants and Migrations in Modern South Asia",
-        "PD2.502 - Product Lifecycle Management",
-        "HS0.220 - Language and Power",
-        "HS0.219 - Governance of AI: Ethics and Regulation",
-        "HS0.218b - Ethics in Research",
-        "HS3.304 - The Gutenberg Parenthesis",
-        "HS2.304 - Sociology of Platform Economies"
-      ],
-      "T2": [
-        "EC4.404 - Mechatronics System Design",
-        "CS7.301 - Machine, Data and Learning",
-        "CS7.505 - Computer Vision",
-        "OC2.102 - Arts-2",
-        "CS5.401 - User Interaction and Usability of Digital Products",
-        "EC4.201 - Mechatronics System Design-1",
-        "EC2.205 - Radio Frequency Based Sensors design: Principles and Applications",
-        "EC2.411 - Advanced Devices"
-      ],
-      "T3": [
-        "OC3.102 - Value Education II",
-        "PD1.411 - Product Design Workshop"
-      ],
-      "T4": [
-        "PD2.423 - Organizational Operations"
-      ],
-      "T5": [],
-      "T6": []
-    }
+  "Monday": {
+    "T1": [
+      "CS2.201 - Computer Systems Organization (B)",
+      "EC5.205 - Introduction to Coding Theory (H1)",
+      "CE1.603 - Advanced Structural Analysis",
+      "SC4.102 - Computing in Sciences II (H2)",
+      "EC2.502 - Flexible Electronics",
+      "CS1.404 - Optimization Methods",
+      "CS1.403 - Compilers",
+      "HS8.101 - Making of Contemporary World",
+      "EC5.206 - Introduction to Statistical Signal Processing (H2)"
+    ],
+    "T2": [
+      "CL1.102 - Introduction to Linguistics II",
+      "CS6.301 - Design and Analysis of Software Systems",
+      "EC2.204 - Intro to Processor Architecture (H1)",
+      "SC2.316 - Molecular Modeling and Simulations",
+      "CS3.303 - Introduction to IoT",
+      "EC2.103 - Analog Electronic Circuits",
+      "SC2.101 - General and Structural Chemistry",
+      "SC2.315 - Molecular Symmetry and Quantum Mechanics",
+      "SC1.308 - The Universe Across Scales",
+      "SC3.303 - Advanced Bioinformatics"
+    ],
+    "T3": [
+      "GS0.301 - Introduction to Spatial Sciences (H2)",
+      "CS2.201 - Computer Systems Organization (A)",
+      "EC5.203 - Communication Theory",
+      "SC2.203 - Biomolecular Structures (H1)",
+      "SC2.202 - Organic Chemistry (H2)",
+      "CS7.401 - Introduction to NLP",
+      "EC5.102 - Information & Communication",
+      "CS1.406 - Advanced Algorithms",
+      "CS8.401 - Principles of Information Security",
+      "CS8.402 - Information Security Audit and Assurance",
+      "EC5.402 - Time Frequency Analysis",
+      "CS7.603 - Topics in Reinforcement Learning",
+      "CS8.502 - Topics in Information-Theoretic Privacy",
+      "HS2.303 - Ethnography in praxis: An investigation into Field, Scales and Theory (H2)"
+    ],
+    "T4": [
+      "HS8.102 - Intro to Human Sciences",
+      "CE5.501 - Design of Hydraulic Structures",
+      "CL2.404 - Computational Psycholinguistics",
+      "MA7.501 - Continuous Variable Quantum Information Theory & Computation",
+      "CG2.401 - Cognitive Neuroscience",
+      "CS1.501 - Advanced Optimization: Theory and Applications"
+    ],
+    "T5": [
+      "CS8.301 - Introduction to Information Security (H1)",
+      "CS7.303 - Digital Signal Analysis (H1)",
+      "CS7.405 - Responsible & Safe AI Systems",
+      "CL3.408 - Applications of Language Models",
+      "EC4.501 - Advances in Robotics & Control",
+      "CG3.501 - Cognitive Science and AI"
+    ],
+    "T6": [
+      "HS0.217 - Ethics and the Digital Society (H1)",
+      "HS0.218a - Ethics in Research (H1)",
+      "HS0.207 - Science and Technology: Critical Perspectives (H1)",
+      "HS1.209 - Music Language Creativity",
+      "HS4.303 - Digital Democracy and Data Governance in the European Union",
+      "HS0.304 - Mind, Body and Cognition"
+    ]
+  },
+  "Tuesday": {
+    "T1": [
+      "SC2.301 - Physics of Soft Condensed Matter",
+      "SC1.204 - Thermodynamics (H1)",
+      "SC1.205 - Statistical Mechanics (H2)",
+      "CS1.305 - Introduction to Algorithms Engineering (H2)",
+      "CS9.312 - Introduction to Quantum Information and Computation (H1)",
+      "HS0.302 - Research Methods in Human Sciences",
+      "CS1.201 - Data Structures and Algorithms (B)",
+      "MA2.101 - Linear Algebra (A)",
+      "SC4.411 - Machine Learning for Natural Sciences",
+      "SC3.326 - Algebraic Methods in Reaction Networks"
+    ],
+    "T2": [
+      "SC1.101 - Electrodynamics (H2)",
+      "SC1.102 - Classical Mechanics (H1)",
+      "CS3.307 - Performance Modeling of Computer Systems (H1)",
+      "CS9.311 - Introduction to Brain and Cognition (H2)",
+      "CS8.403 - System and Network Security",
+      "EC5.408 - Speech Signal Processing",
+      "CS4.401 - Data Systems",
+      "CL3.101 - Computational Linguistics 1",
+      "GS2.503 - Spatial Data Sciences",
+      "HS0.201 - TKHS-I",
+      "HS7.301 - Science, Technology and Society",
+      "CL3.409 - Evaluation Methods for NLP",
+      "CS1.409 - Quantum Algorithms",
+      "CE1.601 - Earthquake Engineering",
+      "CS3.404 - Internals of Application Servers",
+      "CG3.403 - Behavioral Research: Statistical Methods"
+    ],
+    "T3": [
+      "CL2.204 - Language Typology and Universals",
+      "CS1.306 - Numerical Algorithms (H2)",
+      "MA4.303 - Linear Partial Differential Equations and Variational Calculus",
+      "CS0.302 - Computing Tools",
+      "CE8.401 - Disaster Management",
+      "CS9.433 - Hydro Informatics",
+      "CS9.441 - Applied Attention Theory",
+      "CS1.201 - Data Structures and Algorithms (A)",
+      "MA2.101 - Linear Algebra (B)"
+    ],
+    "T4": [
+      "EC2.401 - Analog IC Design",
+      "EC4.403 - Robotics: Planning and Navigation",
+      "CL5.401 - Topics in SSMT",
+      "GS1.401 - Optical Remote Sensing",
+      "SC1.111 - Science II",
+      "CS1.408 - Introduction to Game Theory",
+      "CG4.401 - Music, Mind and Technology",
+      "CS1.503 - Mathematical Foundations of Data Science",
+      "CS3.401 - Distributed Systems",
+      "CS6.401 - Software Engineering"
+    ],
+    "T5": [
+      "HS8.303 - Environmental & Social Governance in Mineral Extraction",
+      "CS3.302 - Software Programming for Performance (H2)",
+      "CS4.302 - Data Visualisation (H1)",
+      "HS0.204 - Introduction to Philosophy of Technology",
+      "HS8.202 - Gender, Culture and Representation",
+      "HS0.203a - Basics of Ethics (H1)",
+      "HS0.203b - Basics of Ethics (H2)",
+      "CE1.608 - Analysis & Design of Precast and Prestressed Structures",
+      "CE1.609 - Analysis and Design of Bridge Structures"
+    ],
+    "T6": [
+      "CS9.424 - Technology Product Entrepreneurship",
+      "EC4.402 - Intro to UAV Design",
+      "CS7.403 - Statistical Methods in AI"
+    ]
+  },
+  "Wednesday": {
+    "T1": [
+      "CS6.201 - Introduction to Software Systems (H) (A)",
+      "CS7.302 - Computer Graphics (H2)",
+      "HS3.305 - Migrants and Migrations in Modern South Asia",
+      "PD2.502 - Product Lifecycle Management",
+      "HS0.220 - Language and Power (H2)",
+      "HS0.219 - Governance of AI: Ethics and Regulation (H2)",
+      "HS0.218b - Ethics in Research (H2)",
+      "HS3.304 - Gutenberg Parenthesis",
+      "HS2.304 - Sociology of Platform Economies"
+    ],
+    "T2": [
+      "EC2.411 - Advanced Devices",
+      "CS5.401 - User Interaction and Usability of Digital Products",
+      "EC4.201 - Mechatronics System Design-1 (H1)",
+      "EC4.404 - Mechatronics System Design",
+      "CS7.301 - Machine, Data and Learning",
+      "CS7.505 - Computer Vision",
+      "OC2.102 - Arts 2 (H1)",
+      "OC2.102 - Arts 2 (H2)"
+    ],
+    "T5": [],
+    "T6": []
   }
+}
