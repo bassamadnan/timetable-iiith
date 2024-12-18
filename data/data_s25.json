@@ -8,6 +8,7 @@
       "EC2.502 - Flexible Electronics",
       "CS1.404 - Optimization Methods",
       "CS1.403 - Compilers",
+      "CL3.409 - Evaluation Methods for NLP (H1)",
       "HS8.101 - Making of Contemporary World",
       "EC5.206 - Introduction to Statistical Signal Processing (H2)"
     ],
@@ -37,6 +38,7 @@
       "EC5.402 - Time Frequency Analysis",
       "CS7.603 - Topics in Reinforcement Learning",
       "CS8.502 - Topics in Information-Theoretic Privacy",
+      "CS9.444 - Quantum aspects of Cryptography",
       "HS2.303 - Ethnography in praxis: An investigation into Field, Scales and Theory (H2)"
     ],
     "T4": [
@@ -51,7 +53,7 @@
       "CS8.301 - Introduction to Information Security (H1)",
       "CS7.303 - Digital Signal Analysis (H1)",
       "CS7.405 - Responsible & Safe AI Systems",
-      "CL3.408 - Applications of Language Models",
+      "CL3.408 - Applications of Language Models (H)",
       "EC4.501 - Advances in Robotics & Control",
       "CG3.501 - Cognitive Science and AI"
     ],
@@ -87,10 +89,9 @@
       "CS4.401 - Data Systems",
       "CL3.101 - Computational Linguistics 1",
       "GS2.503 - Spatial Data Sciences",
-      "HS0.201 - TKHS-I",
-      "HS7.301 - Science, Technology and Society",
-      "CL3.409 - Evaluation Methods for NLP",
       "CS1.409 - Quantum Algorithms",
+      "HS7.301 - Science, Technology and Society",
+      "HS0.201 - TKHS-I",
       "CE1.601 - Earthquake Engineering",
       "CS3.404 - Internals of Application Servers",
       "CG3.403 - Behavioral Research: Statistical Methods"
@@ -153,10 +154,13 @@
       "EC4.201 - Mechatronics System Design-1 (H1)",
       "EC4.404 - Mechatronics System Design",
       "CS7.301 - Machine, Data and Learning",
+      "EC2.205 - Radio Frequency Based Sensors design: Principles and Applications (H2)",
       "CS7.505 - Computer Vision",
-      "OC2.102 - Arts 2 (H1)",
-      "OC2.102 - Arts 2 (H2)"
+      "OC2.102 - Arts-2 (H1)",
+      "OC2.102 - Arts-2 (H2)"
     ],
+    "T3": [],
+    "T4": [],
     "T5": [],
     "T6": []
   }
