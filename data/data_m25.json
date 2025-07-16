@@ -1,244 +1,169 @@
 {
   "Monday": {
     "T1": [
-      "CSL402 - Principles of Programming Languages (I)",
-      "CGL101 - Computer Programming (I)",
-      "CG4.102 - Introduction to Neuroeconomics ()",
-      "CSL301 - Algorithm Analysis & Design ()",
-      "CSL304 - Advanced Operating Systems ()",
-      "CS0.301 - Computer Problem Solving ()",
-      "CE1.607 - Earthquake Resistant Design of Masonry Structures ()",
-      "CSL605 - Blockchain and Web3 Development ()",
-      "EC5.413 - Quantum Error-Correcting Codes ()"
+      "Algorithm Analysis and Design",
+      "Computer Problem Solving",
+      "Quantum Error Correcting Codes",
+      "Earthquake Resistant Design of Masonry Structures",
+      "Blockchain and Web3 Development",
+      "Data Analytics I",
+      "Introduction to Neuroeconomics",
+      "Computer Programming (Section A, B&C)-SH1, SH2 & SH3"
     ],
     "T2": [
-      "EEC201 - Digital Systems and Microcontrollers ()",
-      "SC3.101 - Introduction to Biology ()",
-      "CE1.502 - Structural Engineering Design Studio ()",
-      "SC2.304 - Spectroscopy ()",
-      "SC2.305 - Chemical Kinetics and Reaction Dynamics ()",
-      "SC3.240 - Dynamical Processes in Complex Systems ()",
-      "EC5.201 - Signal Processing ()",
-      "SC2.309 - Chemistry Topics for Engineers ()",
-      "SC1.415 - Physics of the early Universe ()",
-      "SC3.311 - Quantum Materials and Devices ()"
+      "Signal Processing",
+      "Introduction to Biology",
+      "Spectroscopy(H1)",
+      "Chemical Kinetics and Reaction Dynamics (H2)",
+      "Structural Engineering Design Studio",
+      "Physics of Early Universe",
+      "Dynamical Process in Complex Networks",
+      "Chemistry Topics for Engineers",
+      "Quantum Materials and Devices",
+      "Digital Systems and Microcontrollers (Section A, B&C)- SH1, SH2 & SH3"
     ],
     "T3": [
-      "CLL1.101 - Introduction to Linguistics I ()",
-      "EC5.101 - Networks Signals and Systems ()",
-      "CSL302 - Automata Theory ()",
-      "SCL101 - Computing in Sciences ()",
-      "CS4.301 - Data and Applications ()",
-      "HSL101 - Human Sciences Lab-I ()",
-      "CSL304 - Data Structures & Algorithms for Problem Solving ()",
-      "EC4.401 - Robotics: Dynamics and Control ()",
-      "CS1.405 - Modern Complexity Theory ()",
-      "CS7.501 - Advanced NLP ()",
-      "CE1.501 - Structural Dynamics ()",
-      "EC5.410 - Information Theory ()",
-      "IGL102 - Social Thinking and Practice ()",
-      "CGL402 - Introduction to Cognitive Science ()",
-      "CG3.407 - Behavioral Research: Experimental Design ()",
-      "EC5.504 - Quantum Information Theory ()",
-      "CL3.410 - I Language: Models and Agents ()"
+      "Automata Theory (H1)",
+      "Data and Applications (H2)",
+      "Data Structures & Algorithms for Problem Solving",
+      "Structural Dynamics",
+      "Intro to Cognitive Science",
+      "Modern Complexity Theory",
+      "Language Models and Agents",
+      "Information Theory",
+      "Robotics: Dynamics and Control",
+      "Behavioral Research & Experimental Design",
+      "Quantum Information Theory",
+      "Networks, Signals and Systems",
+      "Computing in Sciences-1(H2)",
+      "Human Sciences Lab-1 (H2)",
+      "Introduction to Linguistics-1",
+      "Spatial Thinking and Practice",
+      "Advanced NLP"
     ],
     "T4": [
-      "SC1.110 - Science I ()",
-      "SC3.203 - Systems Biology ()",
-      "CS9.501 - Topics in Software Engineering ()",
-      "MA4.404 - Functional Analysis ()"
+      "Science 1 (Section B-UG2-ECE/D, UG3-CLD, CHD)",
+      "Bioinformatics (H1)",
+      "Systems Biology (H2)",
+      "Topics in Software Engineering",
+      "Functional Analysis"
     ],
     "T5": [
-      "CS7.503 - Mobile Robotics ()",
-      "EC5.407 - Wireless Communications ()",
-      "CS4.406 - Information Retrieval and Extraction ()",
-      "CS4.405 - Data Analytics ()",
-      "CS3.306 - Algorithms and Operating Systems ()",
-      "EC2.410 - CMOS References and Regulators ()",
-      "CE1.601 - Retrofit of Existing Infrastructure ()",
-      "CS1.501 - Advanced Remote Sensing ()",
-      "CS2.502 - Hardware for AI ()"
+      "Advanced Operating Systems",
+      "Principles of Programming Languages",
+      "Information Retrieval & Extraction",
+      "Wireless Communications",
+      "CMOS References and Regulators",
+      "Mobile Robotics",
+      "Retrofit of Existing Infrastructure (H2)",
+      "Advanced Remote Sensing",
+      "Hardware for AI",
+      "Algorithms and Operating Systems"
     ],
     "T6": [
-      "HS3.201 - Introduction to History ()",
-      "HS2.202 - Intro to Psychology ()",
-      "HS1.208 - Introduction to Film Studies ()",
-      "HS8.401 - Rethinking Corruption in India ()"
+      "Introduction to Film Studies",
+      "Introduction to History",
+      "Rethinking Corruption in India",
+      "Introduction to Psychology"
     ]
   },
   "Tuesday": {
     "T1": [
-      "SC3.321 - Biomolecular Structure Interaction and Dynamics ()",
-      "SC1.110 - Science I ()",
-      "CL3.202 - Computational Linguistics II: Comp Semantics and Discourse parsing ()",
-      "CSL501 - Software Systems Development ()",
-      "CE0.501 - Theory of Elasticity ()",
-      "CE9.609 - IoT Workshop ()",
-      "SC1.421 - Introduction to Quantum Field Theory ()",
-      "SC2.401 - Topics in Nanosciences ()",
-      "MA4.101 - Real Analysis ()",
-      "PD2.501 - Product Marketing ()",
-      "HS0.201 - Thinking and Knowing in the Human Sciences - I ()"
+      "Science 1(Section A UG2-CSE/D)",
+      "Computational Linguistics II",
+      "Thinking and Knowing in the Human Sciences – III",
+      "Software Systems Development",
+      "IoT Workshop",
+      "Theory of Elasticity",
+      "Introduction to Quantum Field Theory",
+      "Topics in Nanosciences",
+      "Biomolecular Structure Interaction & Dynamics",
+      "Product Marketing",
+      "Real Analysis (Section A, B& C)- SH1, SH2 & SH3"
     ],
     "T2": [
-      "MAS101 - Digital Image Processing ()",
-      "CS3.301 - Operating Systems and Networks ()",
-      "SC1.203 - Quantum Mechanics ()",
-      "CE2.601 - Advanced Design of Steel Structures ()",
-      "MA6.301 - MCS I - Probability and Statistics ()",
-      "MA6.302 - MCS 2- Linear Algebra ()",
-      "CE4.501 - Finite Element Methods ()",
-      "EC2.201 - VLSI Design ()",
-      "CS3.402 - Advanced Computer Networks ()",
-      "EC5.412 - Foundations for Signal Processing and Communication ()",
-      "PD1.501 - Human Computer Interaction ()",
-      "CS7.201 - Recommender Systems ()",
-      "CG2.402 - Cyber GIS: Geospatial Web and GeoBI ()"
+      "Operating Systems and Networks",
+      "VLSI Design",
+      "Quantum Mechanics",
+      "Maths for Computer Science 1-Probability and Statistics (H1)",
+      "Maths for Computer Science 2 - Linear Algebra (H2)",
+      "Advanced Computer Networks",
+      "Finite Element Methods",
+      "Digital Image Processing",
+      "Advanced Design of Steel Structures",
+      "Neuroinformatics",
+      "Cyber GIS: Geospatial Web and GeoBI",
+      "Human Computer Interaction (H2)",
+      "Discrete Structures (Section B)-SH3",
+      "Foundations for Signal Processing and Communication"
     ],
     "T3": [
-      "MAS101 - Discrete Structures ()",
-      "CL2.203 - Language and Society ()",
-      "HS0.202 - Thinking and Knowing in the Human Sciences-2 ()",
-      "MA6.102 - Probability and Random Processes ()",
-      "CS1.407 - Entropy and Information ()",
-      "HS4.102 - Making of the Contemporary India ()",
-      "CG3.401 - Introduction to Neural and Cognitive Modelling ()"
+      "Probability and Random Processes",
+      "Language and Society",
+      "Thinking and Knowing in the Human Sciences – II",
+      "Introduction to Neural and Cognitive Modeling",
+      "Entropy and Information",
+      "Discrete Structures (Section A)-SH2",
+      "Making of the Contemporary India"
     ],
     "T4": [
-      "GS2.401 - Social Informatics ()",
-      "CS9.428 - Environmental Science & Technology ()",
-      "EC5.202 - Systems Thinking ()",
-      "EC3.201 - Embedded Systems Workshop ()",
-      "CS7.504 - Fairness, Privacy and Ethics in AI ()",
-      "CS9.429 - Design for Social Innovation ()",
-      "SCA.110 - Science Lab I ()",
-      "CL2.405 - Speech Analysis and Linguistics ()",
-      "HS0.301 - Classical Text Readings ()",
-      "CS3.401 - Distributed Systems ()",
-      "CS5.413 - Geospatial Technology for Disaster Risk Modelling ()",
-      "CL4.411 - NLP for Healthcare ()",
-      "CS7.306 - Causal Inference ()"
+      "Systems Thinking",
+      "Distributed Systems",
+      "Speech Analysis and Linguistics",
+      "Spatial Informatics",
+      "Environmental Science & Technology",
+      "Fairness, Privacy and Ethics in AI",
+      "Causal Inference",
+      "Design for Social Innovation",
+      "NLP for Healthcare",
+      "Classical Text Readings",
+      "Geospatial Technology for Disaster Risk Modelling"
     ],
     "T5": [
-      "CS8.501 - Research in Information Security ()",
-      "EC3.201 - Embedded Systems Workshop ()",
-      "EC5.406 - Signal Detection and Estimation Theory ()",
-      "SCA.110 - Science Lab I ()",
-      "HS1.210 - Music Workshop ()",
-      "HS4.201 - Social Science Perspective on HCI ()",
-      "PD7.401 - Early Stage Funding for a Startup ()",
-      "HS1.304 - Introduction to Sociology ()",
-      "HS2.304 - Introduction to Literature ()"
+      "Research in Information Security",
+      "Signal Detection and Estimation Theory",
+      "Social Science Perspective on HCI",
+      "Music Workshop",
+      "Introduction to Sociology",
+      "Introduction to Literature",
+      "Early-Stage Funding for a Startup(H2)"
     ],
     "T6": [
-      "CS7.403 - Statistical Methods in AI ()",
-      "PC7.408 - Digital VLSI Design ()",
-      "CE1.609 - Structural Assessment and retrofitting of structure ()",
-      "HCL101 - Introduction ()"
+      "Statistical Methods in AI",
+      "Digital VLSI Design",
+      "Structural Assessment of Existing Infrastructure",
+      "Embedded Systems Workshop (H)",
+      "Science Lab 1 (H1)"
     ]
   },
   "Wednesday": {
     "T1": [
-      "HS0.203a - Basics of Ethics ()",
-      "PD1.301 - Design Thinking - Research to Define ()",
-      "PD1.401 - Design Thinking - Idea to Evaluate ()",
-      "HS0.201a - Basics of Ethics ()"
+      "Basics of Ethics (H1&H2)",
+      "Design Thinking - Research to Define (H1)",
+      "Design Thinking - Idea to Evaluate (H2)"
     ],
     "T2": [
-      "MA6.101 - Probability and Statistics ()",
-      "CSL101 - Arts I ()",
-      "CS9.501 - User Research Methods ()",
-      "PD2.401 - Product Management 101 ()",
-      "HS2.303 - Work, Entrepreneurship and Technology in Contemporary Societies ()",
-      "OC2.101a - English ()",
-      "HS1.401 - Reading from Hindi Literature ()",
-      "HS3.304 - Environmental Humanities ()"
+      "Probability and Statistics",
+      "Readings from Hindi Literature",
+      "Work, Entrepreneurship and Technology in Contemporary Societies",
+      "Environmental Humanities",
+      "Arts-1 (H1 & H2)",
+      "Product Management 101(H1)",
+      "User Research Method (H2)",
+      "Value Education-1 (H)"
     ],
     "T3": [
-      "OC3.101 - Value Education-1 ()"
-    ],
-    "T4": [],
-    "T5": [],
-    "T6": []
-  },
-  "Thursday": {
-    "T1": [
-      "CSL402 - Principles of Programming Languages (I)",
-      "CGL101 - Computer Programming (I)",
-      "CSL301 - Algorithm Analysis & Design ()",
-      "CSL304 - Advanced Operating Systems ()",
-      "CS0.301 - Computer Problem Solving ()",
-      "EC5.413 - Quantum Error-Correcting Codes ()"
-    ],
-    "T2": [
-      "EEC201 - Digital Systems and Microcontrollers ()",
-      "SC3.101 - Introduction to Biology ()",
-      "SC2.309 - Chemistry Topics for Engineers ()",
-      "SC1.415 - Physics of the early Universe ()",
-      "SC3.311 - Quantum Materials and Devices ()"
-    ],
-    "T3": [
-      "CLL1.101 - Introduction to Linguistics I ()",
-      "CSL302 - Automata Theory ()",
-      "SCL101 - Computing in Sciences ()",
-      "CS4.301 - Data and Applications ()",
-      "HSL101 - Human Sciences Lab-I ()",
-      "EC4.401 - Robotics: Dynamics and Control ()",
-      "CS1.405 - Modern Complexity Theory ()",
-      "CS7.501 - Advanced NLP ()",
-      "CE1.501 - Structural Dynamics ()",
-      "EC5.410 - Information Theory ()",
-      "IGL102 - Social Thinking and Practice ()",
-      "CGL402 - Introduction to Cognitive Science ()",
-      "EC5.504 - Quantum Information Theory ()",
-      "CL3.410 - I Language: Models and Agents ()"
+      "Cognitive Seminar (2-3:30 PM)",
+      "CCNSB Seminar (2-3:30 PM)"
     ],
     "T4": [
-      "SC3.203 - Systems Biology ()",
-      "CS9.501 - Topics in Software Engineering ()",
-      "MA4.404 - Functional Analysis ()",
-      "GS2.401 - Social Informatics ()"
+      "Free Slot / FSIS"
     ],
     "T5": [
-      "CS7.503 - Mobile Robotics ()",
-      "EC5.407 - Wireless Communications ()",
-      "CS4.406 - Information Retrieval and Extraction ()",
-      "CS4.405 - Data Analytics ()",
-      "CS3.306 - Algorithms and Operating Systems ()",
-      "EC2.410 - CMOS References and Regulators ()",
-      "CE1.601 - Retrofit of Existing Infrastructure ()",
-      "CS1.501 - Advanced Remote Sensing ()",
-      "CS2.502 - Hardware for AI ()"
+      "Tutorial Slot"
     ],
     "T6": [
-      "HS3.201 - Introduction to History ()",
-      "HS2.202 - Intro to Psychology ()",
-      "HS1.208 - Introduction to Film Studies ()",
-      "HS8.401 - Rethinking Corruption in India ()"
+      "Tutorial Slot"
     ]
-  },
-  "Friday": {
-    "T1": [],
-    "T2": [
-      "MAS101 - Digital Image Processing ()",
-      "CS3.301 - Operating Systems and Networks ()",
-      "SC1.203 - Quantum Mechanics ()",
-      "MA6.301 - MCS I - Probability and Statistics ()",
-      "MA6.302 - MCS 2- Linear Algebra ()",
-      "CE4.501 - Finite Element Methods ()",
-      "EC2.201 - VLSI Design ()",
-      "CS3.402 - Advanced Computer Networks ()",
-      "EC5.412 - Foundations for Signal Processing and Communication ()",
-      "PD1.501 - Human Computer Interaction ()",
-      "CS7.201 - Recommender Systems ()"
-    ],
-    "T3": [
-      "OC2.101b - English ()",
-      "MA6.101 - Probability and Statistics ()",
-      "OC3.101 - Value Education-1 ()"
-    ],
-    "T4": [],
-    "T5": [],
-    "T6": []
   }
 }
