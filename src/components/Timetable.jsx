@@ -1,10 +1,10 @@
 import React from 'react';
 import { useCourseState } from '../context/CourseProvider';
+import { timeslots } from '../utils/data_parser';
 
 const Timetable = () => {
     const { selectedCourses, handleRemoveCourse } = useCourseState();
     const days = ['Monday', 'Tuesday', 'Wednesday'];
-    const timeSlots = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6'];
   
     const findCourse = (day, slot) => {
       return selectedCourses.find(course => course.day === day && course.slot === slot);
@@ -14,14 +14,14 @@ const Timetable = () => {
     <div className="timetable-grid">
       <div className="grid-header">
         <div className="header-cell"></div>
-        {timeSlots.map(slot => (
-          <div key={slot} className="header-cell">{slot}</div>
+        {Object.entries(timeslots).map(([slotName, slotTime]) => (
+          <div key={slotName} className="header-cell">{slotTime} - {slotName}</div>
         ))}
       </div>
       {days.map(day => (
         <div key={day} className="grid-row">
           <div className="day-cell">{day}</div>
-          {timeSlots.map(slot => {
+          {Object.keys(timeslots).map(slot => {
             const course = findCourse(day, slot);
             return (
               <div 
