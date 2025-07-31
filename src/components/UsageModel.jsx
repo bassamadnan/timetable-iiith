@@ -8,7 +8,7 @@ const UsageModal = () => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-lg max-w-lg w-full">
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg max-w-lg w-full">
         <h2 className="text-xl font-bold mb-4">How to Use this website</h2>
         <p className="mb-4">
           1. Browse available courses in the left panel.<br />
@@ -19,7 +19,7 @@ const UsageModal = () => {
         </p>
         <button 
           onClick={() => setIsModalOpen(false)}
-          className="px-4 py-2 bg-blue-500 text-black rounded hover:bg-blue-600"
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
           Close
         </button>
