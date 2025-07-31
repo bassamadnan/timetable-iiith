@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-import { FaGithub } from 'react-icons/fa';
-import UsageModal from './UsageModel';
+import React from 'react';
+import { FaGithub, FaSun, FaMoon } from 'react-icons/fa';
 import { useCourseState } from '../context/CourseProvider';
 
-
 const Navbar = () => {
-  const {setIsModalOpen, isModalOpen} = useCourseState()
+  const { setIsModalOpen, isModalOpen, theme, toggleTheme } = useCourseState();
   const openGitHub = () => {
     window.open('https://github.com/bassamadnan/timetable-iiith', '_blank');
   };
@@ -20,11 +18,13 @@ const Navbar = () => {
         >
           Usage
         </button>
+        <button onClick={toggleTheme} className="text-2xl mr-4">
+          {theme === 'dark' ? <FaSun /> : <FaMoon />}
+        </button>
         <button onClick={openGitHub} className="text-2xl">
           <FaGithub />
         </button>
       </div>
-      <UsageModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </nav>
   );
 };

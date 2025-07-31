@@ -10,6 +10,22 @@ const CourseProvider = ({ children }) => {
   const [availableCourses, setAvailableCourses] = useState([]);
   const [allCourses, setAllCourses] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  };
+
   useEffect(() => {
     const flattenedCourses = Object.entries(courses).flatMap(([day, slots]) => 
       Object.entries(slots).flatMap(([slot, courseList]) => 
@@ -69,7 +85,9 @@ const CourseProvider = ({ children }) => {
         conflictingCourses,
         filteredCourses: filterCourses(),
         searchTerm,
-        isModalOpen, 
+        isModalOpen,
+        theme,
+        toggleTheme,
         handleCourseSelect,
         handleSearchChange,
         handleRemoveCourse,
