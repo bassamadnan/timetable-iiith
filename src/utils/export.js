@@ -1,8 +1,10 @@
 import ical from 'ical-generator';
-import { timeslots } from './data_parser';
+import { timeslots, almanac } from './data_parser';
+import { parse, nextDay } from 'date-fns';
 
-const semesterEndDate = new Date('2025-11-20T23:59:59');
-
+/*
+ * Copies over timetable for the full week
+*/
 const processCoursesForExport = (courses) => {
   const courseMap = {
     Monday: 'Thursday',
@@ -21,29 +23,24 @@ const processCoursesForExport = (courses) => {
   return duplicatedCourses;
 };
 
+// Parse day string like 'Tuesday' to JS day index (0–6)
+const getDayIndex = (dayStr) => parse(dayStr, 'EEEE', new Date()).getDay();
+
 const getEventDates = (day, timeSlot) => {
     const now = new Date();
-    const dayOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].indexOf(day);
-    const resultDate = new Date(now.getTime());
-    const diff = now.getDay() - dayOfWeek;
-    if (diff > 0) {
-        resultDate.setDate(now.getDate() + (7 - diff));
-    } else {
-        resultDate.setDate(now.getDate() + (-diff));
-    }
-    
-    const [startTime, endTime] = timeslots[timeSlot].replace('AM', '').replace('PM', '').split('-');
-    const [startHour, startMinute] = startTime.split(':').map(Number);
-    const [endHour, endMinute] = endTime.split(':').map(Number);
+    const targetDayIndex = getDayIndex(day);
 
-    const start = new Date(resultDate);
-    start.setHours(startHour < 8 ? startHour + 12 : startHour, startMinute || 0, 0, 0);
+    const isTodayTargetDay = now.getDay() === targetDayIndex;
+    const eventDate = isTodayTargetDay ? now : nextDay(now, targetDayIndex);
 
-    const end = new Date(resultDate);
-    end.setHours(endHour < 8 ? endHour + 12 : endHour, endMinute || 0, 0, 0);
-    
+    const [startStr, endStr] = timeslots[timeSlot].split('-');
+
+    const start = parse(startStr, 'h:mma', eventDate);
+    const end = parse(endStr, 'h:mma', eventDate);
+
     return { start, end };
-}
+};
+
 
 export const exportToIcal = (selectedCourses) => {
   if (selectedCourses.length === 0) {
@@ -53,6 +50,7 @@ export const exportToIcal = (selectedCourses) => {
   
   const cal = ical({ name: 'IIITH Timetable' });
   const coursesToExport = processCoursesForExport(selectedCourses);
+  const semesterEndDate = new Date(almanac.last_date);
 
   coursesToExport.forEach(course => {
     const { start, end } = getEventDates(course.day, course.slot);

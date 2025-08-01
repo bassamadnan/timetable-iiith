@@ -27,7 +27,7 @@ const Navbar = () => {
         <button onClick={toggleTheme} className="text-2xl mr-4">
           {theme === 'dark' ? <FaSun /> : <FaMoon />}
         </button>
-        <button onClick={handleIcalExport} className="text-2xl mr-4" title="Export as iCal">
+        <button onClick={handleIcalExport} className="text-2xl mr-4" title="Export as iCal" aria-label="Export as iCal">
           <FaDownload />
         </button>
         <button onClick={openGitHub} className="text-2xl">
