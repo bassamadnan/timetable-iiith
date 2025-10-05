@@ -48,7 +48,8 @@
   height: 50%;
 }
 
-.course-selection, .conflicting-courses {
+.course-selection,
+.conflicting-courses {
   /* width: 50%; */
   padding: 1rem;
   overflow-y: auto;
@@ -59,18 +60,22 @@
   flex-direction: column;
 }
 
-.grid-header, .grid-row {
+.grid-header,
+.grid-row {
   display: flex;
 }
 
-.header-cell, .day-cell, .grid-cell {
+.header-cell,
+.day-cell,
+.grid-cell {
   flex: 1;
   padding: 0.5rem;
   @apply border border-gray-300 dark:border-zinc-700;
   text-align: center;
 }
 
-.header-cell, .day-cell {
+.header-cell,
+.day-cell {
   font-weight: bold;
   @apply bg-gray-200 dark:bg-gray-800;
 }
@@ -99,8 +104,8 @@
 }
 
 .dark .conflicting-course {
-    background-color: #692020;
-    color: #fecaca;
+  background-color: #692020;
+  color: #fecaca;
 }
 .grid-cell {
   position: relative;
@@ -129,7 +134,7 @@
 .homepage {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 64px); 
+  height: calc(100vh - 64px);
 }
 
 .timetable {
@@ -143,7 +148,8 @@
   width: 100%;
 }
 
-.course-selection-container, .conflicting-courses {
+.course-selection-container,
+.conflicting-courses {
   width: 50%;
   padding: 1rem;
   overflow-y: auto;
@@ -158,7 +164,8 @@
   @apply border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800;
 }
 
-.course-selection, .course-list {
+.course-selection,
+.course-list {
   flex-grow: 1;
   overflow-y: auto;
 }
@@ -170,5 +177,5 @@
 }
 
 body {
-    @apply bg-white text-gray-800 dark:bg-zinc-900 dark:text-gray-200;
+  @apply bg-white text-gray-800 dark:bg-zinc-900 dark:text-gray-200;
 }

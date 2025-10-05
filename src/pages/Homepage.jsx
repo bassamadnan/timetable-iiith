@@ -1,8 +1,8 @@
-import React from 'react';
-import Timetable from '../components/Timetable';
-import CourseSelection from '../components/CourseSelection';
-import ConflictingCourses from '../components/ConflictingCourses';
-import { useCourseState } from '../context/CourseProvider';
+import React from "react";
+import Timetable from "../components/Timetable";
+import CourseSelection from "../components/CourseSelection";
+import ConflictingCourses from "../components/ConflictingCourses";
+import { useCourseState } from "../context/CourseProvider";
 
 const HomePage = () => {
   const { searchTerm, handleSearchChange } = useCourseState();

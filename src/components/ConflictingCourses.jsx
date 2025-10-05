@@ -1,13 +1,13 @@
-import React, { useState, useMemo } from 'react';
-import { useCourseState } from '../context/CourseProvider';
+import React, { useState, useMemo } from "react";
+import { useCourseState } from "../context/CourseProvider";
 
 const ConflictingCourses = () => {
   const { conflictingCourses } = useCourseState();
-  const [conflictingSearchTerm, setConflictingSearchTerm] = useState('');
+  const [conflictingSearchTerm, setConflictingSearchTerm] = useState("");
 
   const filteredConflictingCourses = useMemo(() => {
-    return conflictingCourses.filter(course =>
-      course.name.toLowerCase().includes(conflictingSearchTerm.toLowerCase())
+    return conflictingCourses.filter((course) =>
+      course.name.toLowerCase().includes(conflictingSearchTerm.toLowerCase()),
     );
   }, [conflictingCourses, conflictingSearchTerm]);
 
