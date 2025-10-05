@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { courses } from "../utils/data_parser";
 
 const CourseContext = createContext();
@@ -97,6 +98,10 @@ const CourseProvider = ({ children }) => {
       {children}
     </CourseContext.Provider>
   );
+};
+
+CourseProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export const useCourseState = () => {
