@@ -105,9 +105,7 @@
       "HS1.210 - Music Workshop",
       "HS8.201 - Gender and Society"
     ],
-    "T6": [
-      "CS7.403 - Statistical Methods in AI"
-    ]
+    "T6": ["CS7.403 - Statistical Methods in AI"]
   },
   "Wednesday": {
     "T1": [
@@ -130,9 +128,7 @@
       "EC5.411 - Modern Coding Theory",
       "PD2.501 - Product Marketing"
     ],
-    "T3": [
-      "PD1.501 - Human Computer Interaction"
-    ],
+    "T3": ["PD1.501 - Human Computer Interaction"],
     "T4": [],
     "T5": [],
     "T6": []

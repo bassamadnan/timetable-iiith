@@ -152,18 +152,9 @@
       "User Research Method (H2)",
       "Value Education-1 (H)"
     ],
-    "T3": [
-      "Cognitive Seminar (2-3:30 PM)",
-      "CCNSB Seminar (2-3:30 PM)"
-    ],
-    "T4": [
-      "Free Slot / FSIS"
-    ],
-    "T5": [
-      "Tutorial Slot"
-    ],
-    "T6": [
-      "Tutorial Slot"
-    ]
+    "T3": ["Cognitive Seminar (2-3:30 PM)", "CCNSB Seminar (2-3:30 PM)"],
+    "T4": ["Free Slot / FSIS"],
+    "T5": ["Tutorial Slot"],
+    "T6": ["Tutorial Slot"]
   }
 }
