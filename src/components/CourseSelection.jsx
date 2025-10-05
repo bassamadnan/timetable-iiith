@@ -11,13 +11,13 @@ const CourseSelection = () => {
           <p>No courses found. Try a different search term.</p>
         ) : (
           filteredCourses.map((course, index) => (
-            <div 
+            <button
               key={index} 
               className="course-item" 
               onClick={() => handleCourseSelect(course)}
             >
               {course.name} - {course.day} {course.slot}
-            </div>
+            </button>
           ))
         )}
       </div>

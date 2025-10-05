@@ -88,6 +88,7 @@
   margin-bottom: 0.5rem;
   @apply border border-gray-300 dark:border-gray-600 rounded-md;
   cursor: pointer;
+  text-align: left;
   width: 100%;
 }
 

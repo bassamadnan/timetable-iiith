@@ -24,7 +24,7 @@ const Timetable = () => {
           {Object.keys(timeslots).map(slot => {
             const course = findCourse(day, slot);
             return (
-              <div 
+              <button
                 key={`${day}-${slot}`} 
                 className="grid-cell"
                 onClick={() => course && handleRemoveCourse(course)}
@@ -34,7 +34,7 @@ const Timetable = () => {
                     <p className="course-name">{course.name}</p>
                   </div>
                 ) : null}
-              </div>
+              </button>
             );
           })}
         </div>
