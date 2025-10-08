@@ -5,13 +5,20 @@ import { courses } from "../utils/data_parser";
 const CourseContext = createContext();
 
 const CourseProvider = ({ children }) => {
-  const [selectedCourses, setSelectedCourses] = useState([]);
+  const [selectedCourses, setSelectedCourses] = useState(() => {
+    const savedCourses = localStorage.getItem("selectedCourses");
+    return savedCourses ? JSON.parse(savedCourses) : [];
+  });
   const [conflictingCourses, setConflictingCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [availableCourses, setAvailableCourses] = useState([]);
   const [allCourses, setAllCourses] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    localStorage.setItem("selectedCourses", JSON.stringify(selectedCourses));
+  }, [selectedCourses]);
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -34,8 +41,28 @@ const CourseProvider = ({ children }) => {
       ),
     );
     setAllCourses(flattenedCourses);
-    setAvailableCourses(flattenedCourses);
   }, []);
+
+  useEffect(() => {
+    const newAvailableCourses = allCourses.filter(
+      (course) =>
+        !selectedCourses.some(
+          (selected) =>
+            selected.day === course.day && selected.slot === course.slot,
+        ),
+    );
+    setAvailableCourses(newAvailableCourses);
+
+    const newConflictingCourses = allCourses.filter((course) =>
+      selectedCourses.some(
+        (selected) =>
+          selected.day === course.day &&
+          selected.slot === course.slot &&
+          selected.name !== course.name,
+      ),
+    );
+    setConflictingCourses(newConflictingCourses);
+  }, [selectedCourses, allCourses]);
 
   const filterCourses = () => {
     return availableCourses.filter((course) =>
@@ -45,53 +72,19 @@ const CourseProvider = ({ children }) => {
 
   const handleCourseSelect = (selectedCourse) => {
     setSelectedCourses((prev) => [...prev, selectedCourse]);
-
-    const newConflictingCourses = allCourses.filter(
-      (course) =>
-        course.day === selectedCourse.day &&
-        course.slot === selectedCourse.slot &&
-        course.name !== selectedCourse.name,
-    );
-
-    setConflictingCourses((prev) => [...prev, ...newConflictingCourses]);
-
-    setAvailableCourses((prev) =>
-      prev.filter(
-        (course) =>
-          !(
-            course.day === selectedCourse.day &&
-            course.slot === selectedCourse.slot
-          ),
-      ),
-    );
   };
 
   const handleRemoveCourse = (courseToRemove) => {
     setSelectedCourses((prev) =>
-      prev.filter((course) => course !== courseToRemove),
-    );
-
-    const removedConflictingCourses = conflictingCourses.filter(
-      (course) =>
-        course.day === courseToRemove.day &&
-        course.slot === courseToRemove.slot,
-    );
-
-    setConflictingCourses((prev) =>
       prev.filter(
         (course) =>
           !(
+            course.name === courseToRemove.name &&
             course.day === courseToRemove.day &&
             course.slot === courseToRemove.slot
           ),
       ),
     );
-
-    setAvailableCourses((prev) => [
-      ...prev,
-      courseToRemove,
-      ...removedConflictingCourses,
-    ]);
   };
 
   const handleSearchChange = (term) => {
