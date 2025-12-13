@@ -1,0 +1,182 @@
+{
+    "Monday": {
+        "T1": [
+            "Computer Systems Organization (Section A, B&C)",
+            "Introduction to Coding Theory (H2)",
+            "Optimization Methods",
+            "Making of Contemporary World",
+            "The Mathematics of Information: Theory & Application (H1)",
+            "CMOS Oscillator Design",
+            "Advanced Structural Analysis"
+        ],
+        "T2": [
+            "Introduction to IoT (Section A &B)",
+            "General and Structural Chemistry",
+            "Introduction to Linguistics II",
+            "Analog Electronic Circuits",
+            "Design and Analysis of Software Systems",
+            "Mathematical Models in Biology",
+            "Machine Learning for Natural Sciences",
+            "Physics of Soft Condensed Matter",
+            "Introduction to Particle Physics",
+            "Communication Theory",
+            "Molecular Biology"
+        ],
+        "T3": [
+            "Intro to Human Sciences (UG2 ECE/D, CLD, CGD & UG3 CND) (Sec A)",
+            "Introduction to Spatial Sciences & Technology(H2)",
+            "Organic Chemistry (H2)",
+            "Information & Communication",
+            "Advanced Algorithms",
+            "Foundations for Trustworthy Parallel Computing (H2)",
+            "Speech Signal Processing",
+            "Responsible & Safe AI Systems",
+            "Behavioral Research: Statistical Methods",
+            "Topics in Reinforcement Learning",
+            "User Interaction and Usability of Digital Products"
+        ],
+        "T4": [
+            "Intro to Human Sciences (UG2 CSE/D) (Sec B)",
+            "Science II (UG3 ECE/D, LED, CLD & CHD) (Sec B)",
+            "Basics of Ethics (H1/H2)",
+            "Differential Equations",
+            "Learning and Memory",
+            "Intro to Processor Architecture (H1)",
+            "Art, Vision, & Feelings (H2)",
+            "Computational Psycholinguistics",
+            "Disaster Management",
+            "Linear Partial Differential Equations and Variational Calculus",
+            "Thermodynamics (H1)"
+        ],
+        "T5": [
+            "Statistical Methods in AI",
+            "Introduction to Information Security (H1)",
+            "Digital Signal Analysis (H2)",
+            "Applications of Language Models",
+            "Robotics: Planning and Navigation",
+            "Law, Technology and Digital Governance",
+            "Flexible Electronics"
+        ],
+        "T6": [
+            "Growth and Development",
+            "Critical Viewing and Reading"
+        ]
+    },
+    "Tuesday": {
+        "T1": [
+            "Data Structures and Algorithms (Section A, B&C)",
+            "Introduction to Quantum Information and Computation (H1)",
+            "Introduction to Algorithms Engineering (H2)",
+            "Research Methods in Human Sciences",
+            "Intro to VLSI and Embedded Systems (H1)",
+            "Introduction to Statistical Signal Processing (H2)",
+            "Computing in Sciences II (H2)",
+            "Molecular Modeling and Simulations",
+            "Mathematical Methods in Sciences",
+            "The Universe Across Scales",
+            "Molecular Symmetry and Quantum Mechanics",
+            "Product Lifecycle Management",
+            "Topics in Physics"
+        ],
+        "T2": [
+            "Classical Mechanics (H1)",
+            "Electrodynamics (H2)",
+            "Biomolecular Structures (H1)",
+            "Introduction to Brain and Cognition (H2)",
+            "Data Systems",
+            "Computational Linguistics 1",
+            "Spatial Data Sciences",
+            "Science, Technology and Society",
+            "TKHS-I",
+            "Performance Modeling of Computer Systems (H1)",
+            "Statistical Mechanics (H2)",
+            "Introduction to Game Theory",
+            "Quantum Algorithms",
+            "Analog IC Design",
+            "Cognitive Neuroscience",
+            "Computing Tools",
+            "Analysis & Design of Precast and Prestressed Structures",
+            "Earthquake Engineering",
+            "Instrumentation and Devices",
+            "Engineering Virtual Reality Systems (H)"
+        ],
+        "T3": [
+            "Linear Algebra (Section A, B&C)",
+            "Language Typology and Universals",
+            "Linguistic Data 3: Data Modeling in ILs (H1)",
+            "Numerical Algorithms (H2)",
+            "Geospatial for Sustainable Development",
+            "Language and Power (H1)",
+            "Ethics and the Digital Society (H1)",
+            "AI and Human Rights (H1)",
+            "Literature and the Ethics of telling a Story (H2)",
+            "Ethics in Research (H2)",
+            "Constitutional Ethics (H2)",
+            "Topics in Discrete Mathematics",
+            "Evaluation Methods for NLP (H2)",
+            "Continuous Variable Quantum Information Theory and Computation",
+            "Analysis and Design of Bridge Infrastructure"
+        ],
+        "T4": [
+            "Science II (UG2 CSE/D) (Sec A)",
+            "Distributed Systems",
+            "Information-Theoretic Methods in Computer Science",
+            "Hydro Informatics & Climate Sciences",
+            "Cognitive Science and AI",
+            "Mathematics for Finance",
+            "Optical Remote Sensing",
+            "Topics in SSMT",
+            "Machine Learning for Communication",
+            "Internals of Application Servers",
+            "Intro to Robotics: Perception and Planning (H1)",
+            "Foundations of RF and Microwave Sensors (H2)",
+            "NGS Data Analysis",
+            "Compilers",
+            "Technology Product Entrepreneurship"
+        ],
+        "T5": [
+            "Software Programming for Performance (H1)",
+            "Data Visualisation (H1)",
+            "Readings in Russian Literature",
+            "Music Language Creativity",
+            "The Digital City",
+            "Introduction to Philosophy of Technology",
+            "Sustainable Growth Strategy for Startup (H1)",
+            "Knowing India Through Data (H2)",
+            "Theories and Practices of Nationalism",
+            "System and Network Security"
+        ],
+        "T6": [
+            "Principles of Information Security",
+            "The Mathematics of Information: Theory & Application (H1)",
+            "Intro to UAV Design",
+            "Software Engineering"
+        ]
+    },
+    "Wednesday": {
+        "T1": [
+            "Introduction to Software Systems (H) (A&B)",
+            "Computer Graphics (H2)",
+            "Information Security Audit and Assurance",
+            "Quantum aspects of Cryptography",
+            "Introduction to NLP"
+        ],
+        "T2": [
+            "Machine, Data and Learning",
+            "Computer Vision",
+            "Mechatronics System Design",
+            "Sociology of Platform Economies",
+            "Digital Democracy and Data Governance in the European Union",
+            "Gender, Culture and Representation",
+            "Product Design Workshop"
+        ],
+        "T3": [
+            "Value Education-II (H)"
+        ],
+        "T4": [
+            "Science Lab II (H) (2:00 to 5:00 PM)"
+        ],
+        "T5": [],
+        "T6": []
+    }
+}
