@@ -1,6 +1,7 @@
 [build]
 target = "index.html"
 dist = "dist"
+public_url = "/"
 
 [[hooks]]
 stage = "pre_build"
@@ -9,3 +10,8 @@ command_arguments = ["-c", "npx tailwindcss -i input.css -o tailwind_output.css"
 
 [watch]
 ignore = ["./dist"]
+
+# Use correct public URL for release builds (GitHub Pages)
+[profile.release]
+public_url = "/timetable-iiith/"
+

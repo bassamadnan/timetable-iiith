@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timetable IIITH</title>
+    <link rel="stylesheet" href="/timetable-iiith/tailwind_output-59377831fdca2a50.css" integrity="sha384-Z2i7p4to99NIyz+g+ljlIJqjfNVCVm4n3dP1Nwzv8rlv4uEyx6GjQVvC07wxO15n"/>
+    
+<script type="module">
+import init, * as bindings from '/timetable-iiith/timetable-iiith-35a46453fb0c5f09.js';
+const wasm = await init({ module_or_path: '/timetable-iiith/timetable-iiith-35a46453fb0c5f09_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+<link rel="modulepreload" href="/timetable-iiith/timetable-iiith-35a46453fb0c5f09.js" crossorigin="anonymous" integrity="sha384-bJ0ato5aEE0jkvscnQPTVwK7figwagN3H5l7KGqQzj/Li1qykeSV9Iwr94aRsH0B"><link rel="preload" href="/timetable-iiith/timetable-iiith-35a46453fb0c5f09_bg.wasm" crossorigin="anonymous" integrity="sha384-AOY620VNklM6u28jmDiMbLFEtLkQflnDskt3gHqwQlzmTmA8eO0oBSxbpsS3yTMo" as="fetch" type="application/wasm"></head>
+
+<body class="bg-background text-slate-800 antialiased"></body>
+
+</html>
