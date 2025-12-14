@@ -14,6 +14,11 @@ pub const AVAILABLE_SEMESTERS: &[(&str, &str)] = &[
     ("M24", "data_m24"),
 ];
 
+// Animation Constants
+pub const ANIMATION_TYPING_SPEED_MS: u64 = 50;
+pub const ANIMATION_PAUSE_MS: u64 = 3000;
+pub const EASTER_EGG_DURATION_MS: u64 = 3000;
+
 pub fn get_facts() -> Vec<&'static str> {
     vec![
         "TRY PRESSING ANY KEY!!",

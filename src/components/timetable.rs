@@ -65,6 +65,8 @@ fn TimetableCell(
     let has_conflict_for_class = has_conflict.clone();
     let is_cell_hovered_for_class = is_cell_hovered.clone();
 
+
+
     // Click handler for the container (empty space)
     let d = day.clone();
     let s = time_slot.clone();
@@ -79,13 +81,13 @@ fn TimetableCell(
                 "relative min-h-[100px] p-2 border-2 border-black transition-all duration-200 flex flex-col gap-1 \
                 {}",
                 if has_conflict_for_class() {
-                    "bg-[#FF6B6B]" 
+                    "bg-[var(--accent-danger)]" 
                 } else if is_cell_hovered_for_class() {
-                    "bg-black scale-105 z-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)]" // Special hover style
+                    "bg-[var(--text-main)] scale-105 z-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)]" // Special hover style
                 } else if is_occupied() {
-                    "bg-[#A5B4FC] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1 cursor-pointer"
+                    "bg-[var(--accent-1)] hover:shadow-[4px_4px_0px_0px_var(--shadow-main)] hover:-translate-y-1 hover:-translate-x-1 cursor-pointer"
                 } else {
-                    "bg-white hover:bg-gray-50 cursor-pointer hover:shadow-[inner_0_0_10px_rgba(0,0,0,0.1)]"
+                    "bg-[var(--bg-card)] hover:brightness-95 cursor-pointer hover:shadow-[inner_0_0_10px_rgba(0,0,0,0.1)]"
                 }
             )
                 on:click=on_container_click
@@ -125,9 +127,9 @@ fn TimetableCell(
                                     if is_pending_deletion() {
                                         "bg-red-50 border-2 border-red-500"
                                     } else if is_this_hovered() { 
-                                        "bg-yellow-50 border-2 border-black" 
+                                        "bg-yellow-50 border-2 border-[var(--border-main)]" 
                                     } else { 
-                                        "bg-white hover:bg-red-50 border-2 border-black"
+                                        "bg-[var(--bg-card)] hover:bg-red-50 border-2 border-[var(--border-main)]"
                                     }
                                 )
                                 on:click=move |ev| {
@@ -146,11 +148,11 @@ fn TimetableCell(
                                 // Badge & Text Container
                                 <div class="flex flex-col relative z-10 h-full justify-center">
                                     <Show when=move || duration_badge.is_some()>
-                                        <div class="absolute top-0 right-0 bg-black text-white text-[8px] font-bold px-1 py-0.5 pointer-events-none">
+                                        <div class="absolute top-0 right-0 bg-[var(--text-main)] text-[var(--bg-card)] text-[8px] font-bold px-1 py-0.5 pointer-events-none">
                                             {duration_badge.unwrap()}
                                         </div>
                                     </Show>
-                                    <span class="line-clamp-3 text-[10px] font-bold text-black leading-tight pr-1">
+                                    <span class="line-clamp-3 text-[10px] font-bold text-[var(--text-main)] leading-tight pr-1">
                                         {course.name.clone()}
                                     </span>
                                 </div>
@@ -169,12 +171,12 @@ fn TimetableCell(
                 />
             </div>
             <Show when=is_cell_hovered>
-                <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#FEF08A] text-black text-[10px] font-black px-2 py-1 border-2 border-black shadow-md uppercase tracking-wide whitespace-nowrap z-20">
+                <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[var(--accent-2)] text-black text-[10px] font-black px-2 py-1 border-2 border-[var(--border-main)] shadow-md uppercase tracking-wide whitespace-nowrap z-20">
                     "HERE!"
                 </div>
             </Show>
             <Show when=has_conflict>
-                <div class="absolute -top-3 -right-3 bg-black text-white text-[10px] font-black px-2 py-1 border-2 border-white shadow-md uppercase tracking-wide">
+                <div class="absolute -top-3 -right-3 bg-[var(--text-main)] text-[var(--bg-card)] text-[10px] font-black px-2 py-1 border-2 border-[var(--bg-card)] shadow-md uppercase tracking-wide">
                     "CONFLICT"
                 </div>
             </Show>
@@ -195,14 +197,14 @@ pub fn Timetable(
         <div class="overflow-x-auto pb-4">
             <div class="min-w-[800px]">
                 // Grid Container
-                <div class="grid grid-cols-[100px_repeat(6,1fr)] gap-4 bg-white">
+                <div class="grid grid-cols-[100px_repeat(6,1fr)] gap-4 bg-[var(--bg-card)]">
                     
                     // Header Row (Timeslots)
                     // Header Row (Timeslots)
                     <a 
                         href="https://github.com/sambuaneesh/timetable-iiith" 
                         target="_blank"
-                        class="h-full flex items-center justify-center bg-black text-white hover:bg-gray-800 transition-colors border-b-4 border-r-4 border-black"
+                        class="h-full flex items-center justify-center bg-[var(--text-main)] text-[var(--bg-card)] hover:opacity-80 transition-colors border-b-4 border-r-4 border-[var(--border-main)]"
                         title="View Source on GitHub"
                     >
                         // GitHub Icon
@@ -214,7 +216,7 @@ pub fn Timetable(
                         let c = code.to_string();
                         view! {
                             <div 
-                                class="flex flex-col items-center justify-center p-2 bg-black text-white border-b-4 border-black cursor-pointer hover:bg-gray-800 transition-colors"
+                                class="flex flex-col items-center justify-center p-2 bg-[var(--text-main)] text-[var(--bg-card)] border-b-4 border-[var(--border-main)] cursor-pointer hover:opacity-80 transition-colors"
                                 on:click=move |_| set_active_filter.set(Some(FilterMode::Slot(c.clone())))
                             >
                                 <span class="font-black text-lg">{*code}</span>
@@ -230,7 +232,7 @@ pub fn Timetable(
                             <div class="contents group">
                                 // Day Label
                                 <div 
-                                    class="flex items-center justify-center p-4 bg-black text-white font-black uppercase text-sm tracking-wider border-r-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] cursor-pointer hover:bg-gray-800 transition-colors"
+                                    class="flex items-center justify-center p-4 bg-[var(--text-main)] text-[var(--bg-card)] font-black uppercase text-sm tracking-wider border-r-4 border-[var(--border-main)] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] cursor-pointer hover:opacity-80 transition-colors"
                                     on:click=move |_| set_active_filter.set(Some(FilterMode::Day(d.clone())))
                                 >
                                     {*day}

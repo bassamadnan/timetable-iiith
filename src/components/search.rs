@@ -220,7 +220,7 @@ pub fn Search(
                 <input
                     node_ref=input_ref
                     type="text"
-                    class="w-full px-6 py-4 text-xl font-bold bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] focus:translate-x-[-2px] focus:translate-y-[-2px] placeholder-gray-500 outline-none transition-all duration-200 uppercase"
+                    class="w-full px-6 py-4 text-xl font-bold bg-[var(--bg-card)] border-4 border-[var(--border-main)] shadow-[4px_4px_0px_0px_var(--shadow-main)] focus:shadow-[8px_8px_0px_0px_var(--shadow-main)] focus:translate-x-[-2px] focus:translate-y-[-2px] placeholder-[var(--text-main)] outline-none transition-all duration-200 uppercase text-[var(--text-main)]"
                     prop:placeholder=placeholder
                     prop:value=query
                     on:input=move |ev| {
@@ -241,7 +241,7 @@ pub fn Search(
                         set_timeout(move || set_is_focused.set(false), std::time::Duration::from_millis(200));
                     }
                 />
-                <div class="absolute right-6 top-1/2 -translate-y-1/2 text-black pointer-events-none">
+                <div class="absolute right-6 top-1/2 -translate-y-1/2 text-[var(--text-main)] pointer-events-none">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8">
                         <path stroke-linecap="square" stroke-linejoin="miter" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                     </svg>
@@ -249,7 +249,7 @@ pub fn Search(
             </div>
 
             <Show when=move || is_focused.get() && !filtered_courses().is_empty()>
-                <div class="absolute w-full mt-4 bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-50">
+                <div class="absolute w-full mt-4 bg-[var(--bg-card)] border-4 border-[var(--border-main)] shadow-[8px_8px_0px_0px_var(--shadow-main)] z-50">
                     <ul class="max-h-80 overflow-y-auto">
                         <For
                             each=filtered_courses
@@ -267,9 +267,9 @@ pub fn Search(
                                 view! {
                                     <li 
                                         class=if has_conflict {
-                                            "px-6 py-4 border-b-2 border-black last:border-b-0 bg-[#FF6B6B] hover:bg-red-400 cursor-pointer flex flex-col group transition-colors"
+                                            "px-6 py-4 border-b-2 border-[var(--border-main)] last:border-b-0 bg-[var(--accent-danger)] hover:brightness-110 cursor-pointer flex flex-col group transition-colors"
                                         } else {
-                                            "px-6 py-4 border-b-2 border-black last:border-b-0 hover:bg-[#A5B4FC] cursor-pointer transition-colors flex flex-col group"
+                                            "px-6 py-4 border-b-2 border-[var(--border-main)] last:border-b-0 hover:bg-[var(--accent-1)] cursor-pointer transition-colors flex flex-col group"
                                         }
                                         on:mousedown=move |ev| {
                                             ev.prevent_default();
@@ -277,27 +277,27 @@ pub fn Search(
                                         }
                                     >
                                         <div class="flex justify-between items-center w-full">
-                                            <span class="font-black text-lg text-black group-hover:translate-x-2 transition-transform duration-200">
+                                            <span class="font-black text-lg text-[var(--text-main)] group-hover:translate-x-2 transition-transform duration-200">
                                                 {course.name}
                                             </span>
                                             <div class="flex gap-2">
                                                 <Show when=move || has_conflict>
-                                                    <span class="text-xs font-bold uppercase bg-black text-white px-2 py-1 flex items-center gap-1">
+                                                    <span class="text-xs font-bold uppercase bg-[var(--text-main)] text-[var(--bg-card)] px-2 py-1 flex items-center gap-1">
                                                         "REPLACES: " {conflict_name.clone()}
                                                     </span>
                                                 </Show>
                                                 <Show when=move || duration_badge.is_some()>
-                                                    <span class="text-xs font-bold uppercase bg-black text-white px-2 py-1">
+                                                    <span class="text-xs font-bold uppercase bg-[var(--text-main)] text-[var(--bg-card)] px-2 py-1">
                                                         {duration_badge.unwrap()}
                                                     </span>
                                                 </Show>
                                             </div>
                                         </div>
                                         <div class="flex gap-2 mt-1">
-                                            <span class="text-xs font-bold bg-black text-white px-2 py-0.5">
+                                            <span class="text-xs font-bold bg-[var(--text-main)] text-[var(--bg-card)] px-2 py-0.5">
                                                 {course.day}
                                             </span>
-                                            <span class="text-xs font-bold bg-black text-white px-2 py-0.5">
+                                            <span class="text-xs font-bold bg-[var(--text-main)] text-[var(--bg-card)] px-2 py-0.5">
                                                 {course.slot}
                                             </span>
                                         </div>

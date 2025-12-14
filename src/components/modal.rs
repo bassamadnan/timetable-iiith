@@ -47,14 +47,14 @@ pub fn CourseModal(
                 on:click=move |_| set_active_filter.set(None)
             >
                 <div 
-                    class="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] w-full max-w-2xl max-h-[80vh] flex flex-col m-4"
+                    class="bg-[var(--bg-card)] border-4 border-[var(--border-main)] shadow-[8px_8px_0px_0px_var(--shadow-main)] w-full max-w-2xl max-h-[80vh] flex flex-col m-4"
                     on:click=move |ev| ev.stop_propagation()
                 >
                     // Header
-                    <div class="bg-[#A5B4FC] p-4 border-b-4 border-black flex justify-between items-center">
-                        <h2 class="text-2xl font-black uppercase tracking-tight">{title}</h2>
+                    <div class="bg-[var(--accent-1)] p-4 border-b-4 border-[var(--border-main)] flex justify-between items-center">
+                        <h2 class="text-2xl font-black uppercase tracking-tight text-black">{title}</h2>
                         <button 
-                            class="bg-black text-white w-8 h-8 flex items-center justify-center font-bold hover:bg-red-500 transition-colors"
+                            class="bg-[var(--text-main)] text-[var(--bg-card)] w-8 h-8 flex items-center justify-center font-bold hover:bg-[var(--accent-danger)] transition-colors"
                             on:click=move |_| set_active_filter.set(None)
                         >
                             "X"
@@ -78,18 +78,18 @@ pub fn CourseModal(
 
                                     view! {
                                         <div 
-                                            class="bg-white border-2 border-black p-3 hover:bg-[#FEF08A] hover:translate-x-1 hover:translate-y-1 hover:shadow-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer flex flex-col gap-1 group"
+                                            class="bg-[var(--bg-card)] border-2 border-[var(--border-main)] p-3 hover:bg-[var(--accent-2)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none shadow-[4px_4px_0px_0px_var(--shadow-main)] transition-all cursor-pointer flex flex-col gap-1 group"
                                             on:click=move |_| {
                                                 set_selected_courses.update(|v| v.push(c_clone.clone())); 
                                                 set_active_filter.set(None);
                                             }
                                         >
-                                            <div class="font-black text-lg group-hover:underline">{course.name}</div>
+                                            <div class="font-black text-lg group-hover:underline text-[var(--text-main)]">{course.name}</div>
                                             <div class="flex gap-2 text-xs font-bold items-center">
-                                                <span class="bg-black text-white px-2 py-0.5">{course.day}</span>
-                                                <span class="bg-black text-white px-2 py-0.5">{course.slot}</span>
+                                                <span class="bg-[var(--text-main)] text-[var(--bg-card)] px-2 py-0.5">{course.day}</span>
+                                                <span class="bg-[var(--text-main)] text-[var(--bg-card)] px-2 py-0.5">{course.slot}</span>
                                                 <Show when=move || duration_badge.is_some()>
-                                                    <span class="bg-black text-white px-2 py-0.5">{duration_badge.unwrap()}</span>
+                                                    <span class="bg-[var(--text-main)] text-[var(--bg-card)] px-2 py-0.5">{duration_badge.unwrap()}</span>
                                                 </Show>
                                             </div>
                                         </div>

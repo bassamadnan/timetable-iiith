@@ -157,11 +157,43 @@ fn main() {
             conflict_list
         };
 
+        // Easter Egg
+        let (show_easter_egg, set_show_easter_egg) = signal(false);
+        // Theme Easter Egg
+        let (theme, set_theme) = signal("default".to_string());
+
         view! {
             <div 
-                class="min-h-screen bg-[#E0E7FF] font-mono p-4 md:p-8 text-black selection:bg-black selection:text-[#E0E7FF]"
-                on:click=move |_| set_pending_deletion.set(None)
+                class="min-h-screen bg-[var(--bg-main)] p-4 md:p-8 font-mono relative text-[var(--text-main)] selection:bg-[var(--text-main)] selection:text-[var(--bg-main)]"
+                data-theme=move || theme.get()
+                on:click=move |ev| {
+                    set_pending_deletion.set(None);
+                    // Strict check: Only trigger if clicking directly on the background div
+                    if let Some(target) = ev.target() {
+                        if let Some(current_target) = ev.current_target() {
+                            if target == current_target {
+                                set_show_easter_egg.set(true);
+                                // Auto-hide after duration
+                                Timeout::new(
+                                    crate::config::EASTER_EGG_DURATION_MS.try_into().unwrap_or(3000), 
+                                    move || set_show_easter_egg.set(false)
+                                ).forget();
+                            }
+                        }
+                    }
+                }
             >
+                <Show when=move || show_easter_egg.get()>
+                    <div class="fixed bottom-4 left-4 z-50 animate-in fade-in slide-in-from-bottom-4 duration-300 pointer-events-none">
+                        <div class="bg-[var(--accent-2)] border-4 border-[var(--border-main)] p-4 shadow-[4px_4px_0px_0px_var(--shadow-main)] rotate-[-2deg]">
+                            <p class="font-black uppercase text-lg text-black">
+                                "you are a smart one, aren't you!"
+                            </p>
+                        </div>
+                    </div>
+                </Show>
+                
+                // Semester Selection Modal
                 <CourseModal 
                     all_courses=current_data 
                     selected_courses=selected_courses
@@ -186,11 +218,11 @@ fn main() {
                                     view! {
                                         <button
                                             class=move || format!(
-                                                "p-4 border-4 border-black font-black text-xl uppercase transition-all active:translate-y-1 active:shadow-none {}",
+                                                "p-4 border-4 border-[var(--border-main)] font-black text-xl uppercase transition-all active:translate-y-1 active:shadow-none {}",
                                                 if is_active() {
-                                                    "bg-black text-white shadow-none translate-y-1"
+                                                    "bg-[var(--text-main)] text-[var(--bg-card)] shadow-none translate-y-1"
                                                 } else {
-                                                    "bg-white hover:bg-[#A5B4FC] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
+                                                    "bg-[var(--bg-card)] hover:bg-[var(--accent-1)] shadow-[4px_4px_0px_0px_var(--shadow-main)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_var(--shadow-main)]"
                                                 }
                                             )
                                             on:click=move |_| {
@@ -210,7 +242,7 @@ fn main() {
                 <div class="max-w-7xl mx-auto flex flex-col gap-8">
                     // Header
                     <div 
-                        class="bg-[#A5B4FC] border-4 border-black p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center cursor-pointer hover:bg-[#818CF8] transition-colors group relative"
+                        class="bg-[var(--accent-1)] border-4 border-[var(--border-main)] p-4 shadow-[8px_8px_0px_0px_var(--shadow-main)] flex items-center justify-center cursor-pointer hover:brightness-110 transition-all group relative"
                         on:click=move |ev| {
                             ev.stop_propagation();
                             set_show_semester_modal.set(true);
@@ -218,21 +250,30 @@ fn main() {
                     >
                         <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter flex items-center gap-2">
                             "Timetable" 
-                            <span class="text-white text-stroke-black px-2 relative">
+                            <span class="text-[var(--bg-card)] text-stroke-black px-2 relative">
                                 {"-"} {move || current_semester.get()}
                             </span>
                         </h1>
                         
                         // Tooltip hint
-                        <span class="absolute -bottom-3 left-1/2 -translate-x-1/2 text-[10px] text-black bg-white border-2 border-black px-2 py-0.5 font-bold uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                        <span class="absolute -bottom-3 left-1/2 -translate-x-1/2 text-[10px] text-[var(--text-main)] bg-[var(--bg-card)] border-2 border-[var(--border-main)] px-2 py-0.5 font-bold uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-[2px_2px_0px_0px_var(--shadow-main)]">
                             "CLICK TO CHANGE"
                         </span>
                     </div>
 
                     // Search Section
                     <div 
-                        class="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
-                        on:click=move |ev| ev.stop_propagation()
+                        class="bg-[var(--bg-card)] border-4 border-[var(--border-main)] p-6 shadow-[8px_8px_0px_0px_var(--shadow-main)] cursor-pointer"
+                        on:click=move |ev| {
+                            // Strict check: Only trigger if clicking directly on the container (padding area)
+                            if let Some(target) = ev.target() {
+                                if let Some(current_target) = ev.current_target() {
+                                    if target == current_target {
+                                        set_theme.update(|t| *t = if t == "default" { "retro".to_string() } else { "default".to_string() });
+                                    }
+                                }
+                            }
+                        }
                     >
                         <Search 
                             all_courses=current_data 
@@ -243,7 +284,7 @@ fn main() {
 
                     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
                         // Main Timetable
-                        <div class="lg:col-span-3 bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+                        <div class="lg:col-span-3 bg-[var(--bg-card)] border-4 border-[var(--border-main)] p-6 shadow-[8px_8px_0px_0px_var(--shadow-main)] overflow-hidden">
                             <Timetable 
                                 selected_courses=selected_courses
                                 set_selected_courses=set_selected_courses
@@ -256,9 +297,9 @@ fn main() {
 
                         // Sidebar: Selected & Conflicts
                         <div class="flex flex-col gap-8">
-                             // Conflicts Panel
+                            // Conflicts Panel
                             <Show when=move || !conflicts().is_empty()>
-                                <div class="bg-[#FF6B6B] border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] animate-in slide-in-from-right">
+                                <div class="bg-[var(--accent-danger)] border-4 border-[var(--border-main)] p-6 shadow-[8px_8px_0px_0px_var(--shadow-main)] animate-in slide-in-from-right">
                                     <h3 class="text-2xl font-black uppercase mb-4 flex items-center gap-2">
                                         <span class="text-4xl">"!"</span> "CONFLICTS"
                                     </h3>
@@ -268,9 +309,9 @@ fn main() {
                                             key=|c| format!("{}{}", c.0.name, c.1.name)
                                             children=move |(c1, c2)| {
                                                 view! {
-                                                    <div class="bg-white border-2 border-black p-3 font-bold text-sm">
-                                                        <div class="text-red-600">{c1.day} " - " {c1.slot}</div>
-                                                        <div class="border-t border-black my-1"></div>
+                                                    <div class="bg-[var(--bg-card)] border-2 border-[var(--border-main)] p-3 font-bold text-sm">
+                                                        <div class="text-[var(--accent-danger)]">{c1.day} " - " {c1.slot}</div>
+                                                        <div class="border-t border-[var(--border-main)] my-1"></div>
                                                         <div>{c1.name}</div>
                                                         <div class="text-center font-black">"VS"</div>
                                                         <div>{c2.name}</div>
@@ -283,19 +324,19 @@ fn main() {
                             </Show>
 
                             // Selected Courses Panel
-                            <div class="bg-[#FEF08A] border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                            <div class="bg-[var(--accent-2)] border-4 border-[var(--border-main)] p-6 shadow-[8px_8px_0px_0px_var(--shadow-main)]">
                                 <div 
                                     class="flex items-center justify-between mb-4 cursor-pointer group select-none"
                                     on:click=on_share
                                 >
-                                    <h3 class="text-2xl font-black uppercase">"Selected"</h3>
+                                    <h3 class="text-2xl font-black uppercase text-black">"Selected"</h3>
                                     <div 
                                         class=move || format!(
-                                            "border-2 border-black px-3 py-1 text-sm font-bold uppercase transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 active:translate-x-1 active:translate-y-1 opacity-0 group-hover:opacity-100 {}",
+                                            "border-2 border-[var(--border-main)] px-3 py-1 text-sm font-bold uppercase transition-all shadow-[4px_4px_0px_0px_var(--shadow-main)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 active:translate-x-1 active:translate-y-1 opacity-0 group-hover:opacity-100 text-black {}",
                                             if share_status.get().contains("COPIED") {
-                                                "bg-[#86efac] opacity-100" // Stay visible if copied
+                                                "bg-[var(--accent-3)] opacity-100" // Stay visible if copied
                                             } else {
-                                                "bg-white"
+                                                "bg-[var(--bg-card)]"
                                             }
                                         )
                                     >
@@ -325,11 +366,11 @@ fn main() {
                                             view! {
                                                 <div 
                                                     class=move || format!(
-                                                        "border-2 border-black p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex justify-between items-center group cursor-pointer transition-all {}",
+                                                        "border-2 border-[var(--border-main)] p-3 shadow-[4px_4px_0px_0px_var(--shadow-main)] flex justify-between items-center group cursor-pointer transition-all {}",
                                                         if is_pending_deletion() {
-                                                            "bg-[#FF6B6B] text-white hover:bg-red-600"
+                                                            "bg-[var(--accent-danger)] text-white hover:bg-black"
                                                         } else {
-                                                            "bg-white hover:translate-x-1 hover:translate-y-1 hover:shadow-none bg-white"
+                                                            "bg-[var(--bg-card)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none bg-[var(--bg-card)] text-[var(--text-main)]"
                                                         }
                                                     )
                                                     on:mouseenter=move |_| set_hovered_course.set(Some(c_for_hover.name.clone()))
@@ -356,8 +397,21 @@ fn main() {
                                         }
                                     />
                                     <Show when=move || selected_courses.get().is_empty()>
-                                        <div class="text-gray-500 italic font-bold text-center py-4">
-                                            "No courses selected."
+                                        <div 
+                                            class=move || format!(
+                                                "text-center py-4 font-bold {}",
+                                                if theme.get() == "retro" {
+                                                    "text-[#FF0000] font-black uppercase text-xl animate-pulse tracking-widest"
+                                                } else {
+                                                    "text-gray-500 italic"
+                                                }
+                                            )
+                                        >
+                                            {move || if theme.get() == "retro" {
+                                                "WELCOME TO THE DARK SIDE"
+                                            } else {
+                                                "No courses selected."
+                                            }}
                                         </div>
                                     </Show>
                                 </div>
