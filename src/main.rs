@@ -164,7 +164,7 @@ fn main() {
 
         view! {
             <div 
-                class="min-h-screen bg-[var(--bg-main)] p-4 md:p-8 font-mono relative text-[var(--text-main)] selection:bg-[var(--text-main)] selection:text-[var(--bg-main)]"
+                class="min-h-screen bg-[var(--bg-main)] p-8 font-mono relative text-[var(--text-main)] selection:bg-[var(--text-main)] selection:text-[var(--bg-main)]"
                 data-theme=move || theme.get()
                 on:click=move |ev| {
                     set_pending_deletion.set(None);
@@ -239,7 +239,7 @@ fn main() {
                     </div>
                 </Show>
 
-                <div class="max-w-7xl mx-auto flex flex-col gap-8">
+                <div class="w-[1280px] mx-auto flex flex-col gap-8">
                     // Header
                     <div 
                         class="bg-[var(--accent-1)] border-4 border-[var(--border-main)] p-4 shadow-[8px_8px_0px_0px_var(--shadow-main)] flex items-center justify-center cursor-pointer hover:brightness-110 transition-all group relative"
@@ -248,7 +248,7 @@ fn main() {
                             set_show_semester_modal.set(true);
                         }
                     >
-                        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter flex items-center gap-2">
+                        <h1 class="text-6xl font-black uppercase tracking-tighter flex items-center gap-2">
                             "Timetable" 
                             <span class="text-[var(--bg-card)] text-stroke-black px-2 relative">
                                 {"-"} {move || current_semester.get()}
@@ -282,9 +282,9 @@ fn main() {
                         />
                     </div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <div class="grid grid-cols-4 gap-8">
                         // Main Timetable
-                        <div class="lg:col-span-3 bg-[var(--bg-card)] border-4 border-[var(--border-main)] p-6 shadow-[8px_8px_0px_0px_var(--shadow-main)] overflow-hidden">
+                        <div class="col-span-3 bg-[var(--bg-card)] border-4 border-[var(--border-main)] p-6 shadow-[8px_8px_0px_0px_var(--shadow-main)] overflow-hidden">
                             <Timetable 
                                 selected_courses=selected_courses
                                 set_selected_courses=set_selected_courses

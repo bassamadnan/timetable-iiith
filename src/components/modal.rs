@@ -63,7 +63,7 @@ pub fn CourseModal(
 
                     // List
                     <div class="overflow-y-auto p-4 flex-1">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="grid grid-cols-2 gap-3">
                             <For
                                 each=filtered_courses
                                 key=|c| c.name.clone()
