@@ -1,7 +1,6 @@
 use leptos::prelude::*;
 use web_sys;
-use crate::model::Course;
-use crate::model::FilterMode;
+use crate::model::{Course, FilterMode, CourseDuration};
 
 const TIMESLOTS: &[(&str, &str)] = &[
     ("T1", "8:30 - 9:55"),
@@ -35,7 +34,21 @@ fn TimetableCell(
     };
 
     let courses_for_conflict = courses.clone();
-    let has_conflict = move || courses_for_conflict().len() > 1;
+    let has_conflict = move || {
+        let cs = courses_for_conflict();
+        for i in 0..cs.len() {
+            for j in (i + 1)..cs.len() {
+                let compatible = matches!(
+                    (&cs[i].duration, &cs[j].duration),
+                    (CourseDuration::H1, CourseDuration::H2) | (CourseDuration::H2, CourseDuration::H1)
+                );
+                if !compatible {
+                    return true;
+                }
+            }
+        }
+        false
+    };
     
     let courses_for_occupied = courses.clone();
     let is_occupied = move || !courses_for_occupied().is_empty();
@@ -88,11 +101,17 @@ fn TimetableCell(
                     let is_pending_deletion = move || pending_deletion.get().as_deref() == Some(c_for_click.as_str());
                     let is_pending_deletion_for_show = is_pending_deletion.clone();
                     let click_name = course.name.clone();
+                    
+                    let duration_badge = match course.duration {
+                        CourseDuration::Full => None,
+                        CourseDuration::H1 => Some("H1"),
+                        CourseDuration::H2 => Some("H2"),
+                    };
 
                     view! {
                         <div 
                             class=move || format!(
-                                "text-xs font-bold border border-black p-1 shadow-sm leading-tight break-words transition-colors cursor-pointer select-none {}",
+                                "text-xs font-bold border border-black p-1 shadow-sm leading-tight break-words transition-colors cursor-pointer select-none flex flex-col gap-1 {}",
                                 if is_pending_deletion() {
                                     "bg-[#FF6B6B] text-white animate-pulse"
                                 } else if is_this_hovered() { 
@@ -114,6 +133,9 @@ fn TimetableCell(
                                 }
                             }
                         >
+                            <Show when=move || duration_badge.is_some()>
+                                <span class="text-[8px] bg-black text-white w-fit px-1 rounded-sm">{duration_badge.unwrap()}</span>
+                            </Show>
                             {course.name}
                             <Show when=is_pending_deletion_for_show>
                                 <span class="block text-[8px] uppercase pt-1">"Tap to del"</span>

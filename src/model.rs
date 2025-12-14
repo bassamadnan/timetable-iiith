@@ -9,13 +9,26 @@ pub enum FilterMode {
 use std::collections::HashMap;
 
 pub type DaySchedule = HashMap<String, Vec<String>>;
-pub type TimetableData = HashMap<String, DaySchedule>;
 
-#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq, Hash)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub enum CourseDuration {
+    Full,
+    H1,
+    H2,
+}
+
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Course {
     pub name: String,
     pub day: String,
     pub slot: String,
+    pub duration: CourseDuration,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct TimetableData {
+    #[serde(flatten)]
+    pub days: HashMap<String, DaySchedule>,
 }
 
 pub trait TimetableExt {
@@ -25,13 +38,22 @@ pub trait TimetableExt {
 impl TimetableExt for TimetableData {
     fn flatten_courses(&self) -> Vec<Course> {
         let mut courses = Vec::new();
-        for (day, slots) in self {
+        for (day, slots) in &self.days {
             for (slot, course_names) in slots {
                 for name in course_names {
+                    let duration = if name.contains("(H1)") {
+                        CourseDuration::H1
+                    } else if name.contains("(H2)") && !name.contains("(H1/H2)") {
+                        CourseDuration::H2
+                    } else {
+                        CourseDuration::Full
+                    };
+
                     courses.push(Course {
                         name: name.clone(),
                         day: day.clone(),
                         slot: slot.clone(),
+                        duration,
                     });
                 }
             }

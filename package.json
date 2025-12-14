@@ -1,14 +1,8 @@
 {
-  "devDependencies": {
-    "autoprefixer": "^10.4.22",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.3",
-    "tailwindcss-animate": "^1.0.7"
-  },
   "name": "timetable-iiith",
   "version": "1.0.0",
   "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
-  "main": "index.js",
+  "main": "tailwind.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/sambuaneesh/timetable-iiith/issues"
   },
-  "homepage": "https://github.com/sambuaneesh/timetable-iiith#readme"
+  "homepage": "https://github.com/sambuaneesh/timetable-iiith#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17",
+    "tailwindcss-animate": "^1.0.7"
+  }
 }

@@ -2,7 +2,7 @@ mod model;
 mod components;
 
 use leptos::prelude::*;
-use crate::model::{Course, TimetableData, TimetableExt, FilterMode};
+use crate::model::{Course, TimetableData, TimetableExt, FilterMode, CourseDuration};
 use crate::components::{
     search::Search,
     timetable::Timetable,
@@ -37,7 +37,14 @@ fn main() {
                     let c1 = &selected[i];
                     let c2 = &selected[j];
                     if c1.day == c2.day && c1.slot == c2.slot {
-                        conflict_list.push((c1.clone(), c2.clone()));
+                        let is_compatible = matches!(
+                            (&c1.duration, &c2.duration),
+                            (CourseDuration::H1, CourseDuration::H2) | (CourseDuration::H2, CourseDuration::H1)
+                        );
+                        
+                        if !is_compatible {
+                            conflict_list.push((c1.clone(), c2.clone()));
+                        }
                     }
                 }
             }
@@ -62,7 +69,7 @@ fn main() {
                     // Header
                     <div class="bg-[#A5B4FC] border-4 border-black p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
                         <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter">
-                            "IIITH" <span class="text-white text-stroke-black">"-S26"</span>
+                            "Timetable" <span class="text-white text-stroke-black">"-S26"</span>
                         </h1>
                     </div>
 

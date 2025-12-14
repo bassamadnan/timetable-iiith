@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use crate::model::{Course, FilterMode};
+use crate::model::{Course, FilterMode, CourseDuration};
 
 #[component]
 pub fn CourseModal(
@@ -69,6 +69,13 @@ pub fn CourseModal(
                                 key=|c| c.name.clone()
                                 children=move |course| {
                                     let c_clone = course.clone();
+                                    
+                                    let duration_badge = match course.duration {
+                                        CourseDuration::Full => None,
+                                        CourseDuration::H1 => Some("H1"),
+                                        CourseDuration::H2 => Some("H2"),
+                                    };
+
                                     view! {
                                         <div 
                                             class="bg-white border-2 border-black p-3 hover:bg-[#FEF08A] hover:translate-x-1 hover:translate-y-1 hover:shadow-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer flex flex-col gap-1 group"
@@ -78,9 +85,12 @@ pub fn CourseModal(
                                             }
                                         >
                                             <div class="font-black text-lg group-hover:underline">{course.name}</div>
-                                            <div class="flex gap-2 text-xs font-bold">
+                                            <div class="flex gap-2 text-xs font-bold items-center">
                                                 <span class="bg-black text-white px-2 py-0.5">{course.day}</span>
                                                 <span class="bg-black text-white px-2 py-0.5">{course.slot}</span>
+                                                <Show when=move || duration_badge.is_some()>
+                                                    <span class="bg-black text-white px-2 py-0.5">{duration_badge.unwrap()}</span>
+                                                </Show>
                                             </div>
                                         </div>
                                     }
