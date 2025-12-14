@@ -8,4 +8,4 @@ command = "sh"
 command_arguments = ["-c", "npx tailwindcss -i input.css -o tailwind_output.css"]
 
 [watch]
-ignore = ["./legacy_frontend", "./dist"]
+ignore = ["./dist"]

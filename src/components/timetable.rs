@@ -90,60 +90,75 @@ fn TimetableCell(
             )
             on:click=on_container_click
         >
-            <For
-                each=courses
-                key=|c| c.name.clone()
-                children=move |course| {
-                    let course_name = course.name.clone();
-                    let c_for_click = course.name.clone();
-                    
-                    let is_this_hovered = move || hovered_course.get().as_deref() == Some(course_name.as_str());
-                    let is_pending_deletion = move || pending_deletion.get().as_deref() == Some(c_for_click.as_str());
-                    let is_pending_deletion_for_show = is_pending_deletion.clone();
-                    let click_name = course.name.clone();
-                    
-                    let duration_badge = match course.duration {
-                        CourseDuration::Full => None,
-                        CourseDuration::H1 => Some("H1"),
-                        CourseDuration::H2 => Some("H2"),
-                    };
+            <div class="w-full h-full flex flex-col">
+                <For
+                    each=courses
+                    key=|c| c.name.clone()
+                    children=move |course| {
+                        let course_name = course.name.clone();
+                        let c_for_click = course.name.clone();
+                        
+                        let is_this_hovered = move || hovered_course.get().as_deref() == Some(course_name.as_str());
+                        let is_pending_deletion = move || pending_deletion.get().as_deref() == Some(c_for_click.as_str());
+                        let is_pending_deletion_for_show = is_pending_deletion.clone();
+                        let click_name = course.name.clone();
+                        
+                        let duration_badge = match course.duration {
+                            CourseDuration::Full => None,
+                            CourseDuration::H1 => Some("H1"),
+                            CourseDuration::H2 => Some("H2"),
+                        };
 
-                    view! {
-                        <div 
-                            class=move || format!(
-                                "text-xs font-bold border border-black p-1 shadow-sm leading-tight break-words transition-colors cursor-pointer select-none flex flex-col gap-1 {}",
-                                if is_pending_deletion() {
-                                    "bg-[#FF6B6B] text-white animate-pulse"
-                                } else if is_this_hovered() { 
-                                    "bg-[#FEF08A] text-black" 
-                                } else { 
-                                    "bg-white text-black hover:bg-red-100" 
-                                }
-                            )
-                            on:click=move |ev| {
-                                ev.stop_propagation();
-                                let name = click_name.clone();
-                                let current_pending = pending_deletion.get();
+                        view! {
+                            <div 
+                                class=move || format!(
+                                    "flex-1 w-full min-h-0 text-xs font-bold border-black p-1 leading-tight break-words transition-colors cursor-pointer select-none flex flex-col justify-center relative overflow-hidden group/item {}",
+                                    if is_pending_deletion() {
+                                        "bg-[#FF6B6B] text-white animate-pulse z-20 border"
+                                    } else if is_this_hovered() { 
+                                        "bg-[#FEF08A] text-black z-10 border" 
+                                    } else { 
+                                        "bg-transparent text-black hover:bg-red-50"
+                                    }
+                                )
+                                style="border-bottom: 1px solid black;" 
+                                // Note: We might want last-child border-bottom-0, but explicit style/class logic is safer for dynamic lists
+                                on:click=move |ev| {
+                                    ev.stop_propagation();
+                                    let name = click_name.clone();
+                                    let current_pending = pending_deletion.get();
 
-                                if current_pending.as_deref() == Some(name.as_str()) {
-                                    set_selected_courses.update(|v| v.retain(|x| x.name != name));
-                                    set_pending_deletion.set(None);
-                                } else {
-                                    set_pending_deletion.set(Some(name));
+                                    if current_pending.as_deref() == Some(name.as_str()) {
+                                        set_selected_courses.update(|v| v.retain(|x| x.name != name));
+                                        set_pending_deletion.set(None);
+                                    } else {
+                                        set_pending_deletion.set(Some(name));
+                                    }
                                 }
-                            }
-                        >
-                            <Show when=move || duration_badge.is_some()>
-                                <span class="text-[8px] bg-black text-white w-fit px-1 rounded-sm">{duration_badge.unwrap()}</span>
-                            </Show>
-                            {course.name}
-                            <Show when=is_pending_deletion_for_show>
-                                <span class="block text-[8px] uppercase pt-1">"Tap to del"</span>
-                            </Show>
-                        </div>
+                            >
+                                // Content Container
+                                <div class="flex flex-col gap-0.5 relative z-10">
+                                    <Show when=move || duration_badge.is_some()>
+                                        <span class="text-[8px] bg-black text-white w-fit px-1 rounded-sm mb-0.5">{duration_badge.unwrap()}</span>
+                                    </Show>
+                                    <span class="line-clamp-3 text-[10px] sm:text-xs leading-tight">
+                                        {course.name.clone()}
+                                    </span>
+                                </div>
+
+                                // Deletion Overlay
+                                <Show when=is_pending_deletion_for_show>
+                                    <div class="absolute inset-0 flex items-center justify-center bg-[#FF6B6B]/90 backdrop-blur-[1px] z-30">
+                                        <span class="text-[10px] font-black uppercase text-white tracking-widest border-2 border-white px-1 py-0.5 rotate-[-5deg] shadow-sm">
+                                            "Confirm"
+                                        </span>
+                                    </div>
+                                </Show>
+                            </div>
+                        }
                     }
-                }
-            />
+                />
+            </div>
             <Show when=is_cell_hovered>
                 <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#FEF08A] text-black text-[10px] font-black px-2 py-1 border-2 border-black shadow-md uppercase tracking-wide whitespace-nowrap z-20">
                     "HERE!"

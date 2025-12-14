@@ -2,6 +2,30 @@ use leptos::prelude::*;
 use crate::model::{Course, CourseDuration};
 use web_sys::wasm_bindgen::JsCast;
 
+// Helper for fuzzy search
+fn levenshtein(s1: &str, s2: &str) -> usize {
+    let s1_chars: Vec<char> = s1.chars().collect();
+    let s2_chars: Vec<char> = s2.chars().collect();
+    let len1 = s1_chars.len();
+    let len2 = s2_chars.len();
+    
+    let mut d = vec![vec![0; len2 + 1]; len1 + 1];
+
+    for i in 0..=len1 { d[i][0] = i; }
+    for j in 0..=len2 { d[0][j] = j; }
+
+    for i in 1..=len1 {
+        for j in 1..=len2 {
+            let cost = if s1_chars[i - 1] == s2_chars[j - 1] { 0 } else { 1 };
+            d[i][j] = std::cmp::min(
+                std::cmp::min(d[i - 1][j] + 1, d[i][j - 1] + 1),
+                d[i - 1][j - 1] + cost
+            );
+        }
+    }
+    d[len1][len2]
+}
+
 #[component]
 pub fn Search(
     #[prop(into)] all_courses: Signal<Vec<Course>>,
@@ -15,33 +39,18 @@ pub fn Search(
     // Global Keydown Listener
     let _ = window_event_listener(leptos::ev::keydown, move |ev: web_sys::KeyboardEvent| {
         let key = ev.key();
-        
-        // Ignore if modifier keys are pressed or if target is already an input/textarea
-        if ev.ctrl_key() || ev.alt_key() || ev.meta_key() {
-            return;
-        }
+        if ev.ctrl_key() || ev.alt_key() || ev.meta_key() { return; }
 
         if let Some(target) = ev.target() {
             if let Some(el) = target.dyn_ref::<web_sys::HtmlElement>() {
-                if el.tag_name() == "INPUT" || el.tag_name() == "TEXTAREA" {
-                    return;
-                }
+                if el.tag_name() == "INPUT" || el.tag_name() == "TEXTAREA" { return; }
             }
         }
 
-        // Check if key is a single printable character (a-z, 0-9)
         if key.len() == 1 {
             if let Some(input) = input_ref.get() {
                 input.focus().unwrap_or_default();
-                // We don't need to manually append because browser specific behavior might handle it 
-                // if we focus immediately, but usually focusing eats the key unless we are careful.
-                // A better UX for "type to search" is to focus AND append the key if it wasn't typed into the input itself.
-                // However, focusing mid-event often drops the key. 
-                // Let's explicitly append it.
-                // Actually, if we just focus, the keydown might trigger input? No, the keydown happened on body.
-                // The `keypress` or `input` event would follow.
-                
-                // Let's just focus and append the char to the query signal.
+                ev.prevent_default();
                 set_query.update(|q| q.push_str(&key));
                 set_is_focused.set(true);
             }
@@ -50,24 +59,82 @@ pub fn Search(
 
     let filtered_courses = move || {
         let q = query.get().to_lowercase();
-        if q.is_empty() {
-            return vec![];
-        }
+        if q.is_empty() { return vec![]; }
         
         let all = all_courses.get();
         let selected = selected_courses.get();
+
+        // Tokenize query once
+        let q_tokens: Vec<&str> = q.split_whitespace().collect();
         
-        all.into_iter()
-            .filter(|c| {
-                let name_match = c.name.to_lowercase().contains(&q);
-                let already_selected = selected.contains(c);
-                name_match && !already_selected
+        // Scoring Structure: (Course, Score)
+        // Score: Lower is better.
+        
+        let mut scored: Vec<(Course, usize)> = all.into_iter()
+            .filter(|c| !selected.contains(c))
+            .filter_map(|c| {
+                let name_lower = c.name.to_lowercase();
+                let c_tokens: Vec<&str> = name_lower.split_whitespace().collect();
+                
+                let mut total_score = 0;
+                
+                // Every query token must match SOMETHING in the course name
+                for q_tok in &q_tokens {
+                    let mut best_tok_score = 1000; // High default
+                    
+                    for c_tok in &c_tokens {
+                        // 1. Check strict prefix/substring first for speed & accuracy
+                        if c_tok.starts_with(q_tok) {
+                            best_tok_score = 0;
+                            break; // Found perfect prefix match for this word
+                        }
+                        
+                        // 2. Fuzzy Prefix Match
+                        // We check prefixes of c_tok that are similar in length to q_tok
+                        // e.g. q_tok="qan" (len 3), c_tok="quantum".
+                        // Check prefixes of len 2, 3, 4, 5...
+                        
+                        let min_len = q_tok.len().saturating_sub(1).max(1);
+                        let max_len = (q_tok.len() + 2).min(c_tok.len());
+                        
+                        if min_len <= max_len {
+                            for len in min_len..=max_len {
+                                let prefix = &c_tok[0..len];
+                                let dist = levenshtein(q_tok, prefix);
+                                best_tok_score = best_tok_score.min(dist);
+                            }
+                        } else if c_tok.len() < min_len {
+                            // If course word is shorter than query word (minus 1), just compare directly
+                             let dist = levenshtein(q_tok, c_tok);
+                             best_tok_score = best_tok_score.min(dist);
+                        }
+                    }
+                    
+                    // Threshold logic
+                    // Short query words (<=3 chars) need tight match (dist <= 1)
+                    // Longer words allow more slack
+                    let threshold = if q_tok.len() <= 3 { 1 } else { 2 };
+                    
+                    if best_tok_score > threshold {
+                        return None; // This query token failed to match any word
+                    }
+                    
+                    total_score += best_tok_score;
+                }
+                
+                Some((c, total_score))
             })
-            // Detect conflicts
-            .map(|c| {
+            .collect();
+            
+        // Sort by Score (ascending)
+        scored.sort_by_key(|(_, score)| *score);
+        
+        // Take top 10 and map to (Course, ConflictName)
+        scored.into_iter()
+            .take(10)
+            .map(|(c, _)| {
                 let conflict = selected.iter().find(|s| {
                     if s.day != c.day || s.slot != c.slot { return false; }
-                    // Check if they are incompatible
                     !matches!(
                         (&s.duration, &c.duration),
                         (CourseDuration::H1, CourseDuration::H2) | (CourseDuration::H2, CourseDuration::H1)
@@ -76,13 +143,11 @@ pub fn Search(
                 let conflict_name = conflict.map(|s| s.name.clone());
                 (c, conflict_name)
             })
-            .take(10) // Limit results
             .collect::<Vec<_>>()
     };
 
     let on_select = move |course: Course| {
         set_selected.update(|s| {
-            // Remove colliding courses ONLY if they actually conflict
             s.retain(|c| {
                 if c.day != course.day || c.slot != course.slot { return true; }
                  matches!(
