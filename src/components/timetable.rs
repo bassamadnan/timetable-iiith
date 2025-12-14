@@ -17,7 +17,10 @@ fn TimetableCell(
     #[prop(into)] day: String,
     #[prop(into)] time_slot: String,
     selected_courses: Signal<Vec<Course>>,
+    set_selected_courses: WriteSignal<Vec<Course>>,
     hovered_course: Signal<Option<String>>,
+    pending_deletion: Signal<Option<String>>,
+    set_pending_deletion: WriteSignal<Option<String>>,
 ) -> impl IntoView {
     let courses = move || {
         selected_courses.get()
@@ -53,7 +56,7 @@ fn TimetableCell(
             } else if is_cell_hovered_for_class() {
                 "bg-black scale-105 z-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)]" // Special hover style
             } else if is_occupied() {
-                "bg-[#A5B4FC] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1"
+                "bg-[#A5B4FC] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1 cursor-pointer"
             } else {
                 "bg-white hover:bg-gray-50"
             }
@@ -63,13 +66,42 @@ fn TimetableCell(
                 key=|c| c.name.clone()
                 children=move |course| {
                     let course_name = course.name.clone();
+                    let c_for_click = course.name.clone();
+                    
                     let is_this_hovered = move || hovered_course.get().as_deref() == Some(course_name.as_str());
+                    let is_pending_deletion = move || pending_deletion.get().as_deref() == Some(c_for_click.as_str());
+                    let is_pending_deletion_for_show = is_pending_deletion.clone();
+                    let click_name = course.name.clone();
+
                     view! {
-                        <div class=move || format!(
-                            "text-xs font-bold border border-black p-1 shadow-sm leading-tight break-words transition-colors {}",
-                            if is_this_hovered() { "bg-[#FEF08A] text-black" } else { "bg-white text-black" }
-                        )>
+                        <div 
+                            class=move || format!(
+                                "text-xs font-bold border border-black p-1 shadow-sm leading-tight break-words transition-colors cursor-pointer select-none {}",
+                                if is_pending_deletion() {
+                                    "bg-[#FF6B6B] text-white animate-pulse"
+                                } else if is_this_hovered() { 
+                                    "bg-[#FEF08A] text-black" 
+                                } else { 
+                                    "bg-white text-black hover:bg-red-100" 
+                                }
+                            )
+                            on:click=move |ev| {
+                                ev.stop_propagation();
+                                let name = click_name.clone();
+                                let current_pending = pending_deletion.get();
+
+                                if current_pending.as_deref() == Some(name.as_str()) {
+                                    set_selected_courses.update(|v| v.retain(|x| x.name != name));
+                                    set_pending_deletion.set(None);
+                                } else {
+                                    set_pending_deletion.set(Some(name));
+                                }
+                            }
+                        >
                             {course.name}
+                            <Show when=is_pending_deletion_for_show>
+                                <span class="block text-[8px] uppercase pt-1">"Tap to del"</span>
+                            </Show>
                         </div>
                     }
                 }
@@ -91,7 +123,10 @@ fn TimetableCell(
 #[component]
 pub fn Timetable(
     #[prop(into)] selected_courses: Signal<Vec<Course>>,
+    #[prop(into)] set_selected_courses: WriteSignal<Vec<Course>>,
     #[prop(into)] hovered_course: Signal<Option<String>>,
+    #[prop(into)] pending_deletion: Signal<Option<String>>,
+    #[prop(into)] set_pending_deletion: WriteSignal<Option<String>>,
 ) -> impl IntoView {
     view! {
         <div class="overflow-x-auto pb-4">
@@ -126,7 +161,10 @@ pub fn Timetable(
                                             day=day.to_string() 
                                             time_slot=slot_code.to_string() 
                                             selected_courses=selected_courses
-                                            hovered_course=hovered_course 
+                                            set_selected_courses=set_selected_courses
+                                            hovered_course=hovered_course
+                                            pending_deletion=pending_deletion
+                                            set_pending_deletion=set_pending_deletion
                                         />
                                     }
                                 }).collect::<Vec<_>>()}

@@ -20,6 +20,7 @@ fn main() {
         let (all_courses, _) = signal(initial_all_courses.clone());
         let (selected_courses, set_selected_courses) = signal(Vec::<Course>::new());
         let (hovered_course, set_hovered_course) = signal(Option::<String>::None);
+        let (pending_deletion, set_pending_deletion) = signal(Option::<String>::None);
 
         // Global Conflict Detection
         let conflicts = move || {
@@ -38,7 +39,10 @@ fn main() {
         };
 
         view! {
-            <div class="min-h-screen bg-[#E0E7FF] font-mono p-4 md:p-8 text-black selection:bg-black selection:text-[#E0E7FF]">
+            <div 
+                class="min-h-screen bg-[#E0E7FF] font-mono p-4 md:p-8 text-black selection:bg-black selection:text-[#E0E7FF]"
+                on:click=move |_| set_pending_deletion.set(None)
+            >
                 
                 <div class="max-w-7xl mx-auto flex flex-col gap-8">
                     // Header
@@ -52,7 +56,10 @@ fn main() {
                     </div>
 
                     // Search Section
-                    <div class="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                    <div 
+                        class="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+                        on:click=move |ev| ev.stop_propagation()
+                    >
                         <Search 
                             all_courses=all_courses 
                             selected_courses=selected_courses
@@ -64,8 +71,11 @@ fn main() {
                         // Main Timetable
                         <div class="lg:col-span-3 bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
                             <Timetable 
-                                selected_courses=selected_courses 
+                                selected_courses=selected_courses
+                                set_selected_courses=set_selected_courses
                                 hovered_course=hovered_course
+                                pending_deletion=pending_deletion
+                                set_pending_deletion=set_pending_deletion
                             />
                         </div>
 
@@ -108,22 +118,43 @@ fn main() {
                                             let c = course.clone();
                                             let c_for_click = c.clone();
                                             let c_for_hover = c.clone();
+                                            let c_name_check = c.name.clone();
+                                            
+                                            let is_pending_deletion = move || {
+                                                pending_deletion.get().as_deref() == Some(c_name_check.as_str())
+                                            };
+
+                                            let is_pending_deletion_for_show = is_pending_deletion.clone();
+
                                             view! {
                                                 <div 
-                                                    class="bg-white border-2 border-black p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex justify-between items-center group hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all cursor-default"
+                                                    class=move || format!(
+                                                        "border-2 border-black p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex justify-between items-center group cursor-pointer transition-all {}",
+                                                        if is_pending_deletion() {
+                                                            "bg-[#FF6B6B] text-white hover:bg-red-600"
+                                                        } else {
+                                                            "bg-white hover:translate-x-1 hover:translate-y-1 hover:shadow-none bg-white"
+                                                        }
+                                                    )
                                                     on:mouseenter=move |_| set_hovered_course.set(Some(c_for_hover.name.clone()))
                                                     on:mouseleave=move |_| set_hovered_course.set(None)
+                                                    on:click=move |ev| {
+                                                        ev.stop_propagation();
+                                                        let name = c_for_click.name.clone();
+                                                        let current_pending = pending_deletion.get();
+                                                        
+                                                        if current_pending.as_deref() == Some(name.as_str()) {
+                                                            set_selected_courses.update(|v| v.retain(|x| x.name != name));
+                                                            set_pending_deletion.set(None);
+                                                        } else {
+                                                            set_pending_deletion.set(Some(name));
+                                                        }
+                                                    }
                                                 >
                                                     <span class="font-bold text-sm truncate pr-2">{c.name}</span>
-                                                    <button 
-                                                        class="bg-black text-white w-6 h-6 flex items-center justify-center font-bold border border-black hover:bg-red-500 transition-colors"
-                                                        on:click=move |_| {
-                                                            let name_to_remove = c_for_click.name.clone();
-                                                            set_selected_courses.update(|v| v.retain(|x| x.name != name_to_remove));
-                                                        }
-                                                    >
-                                                        "X"
-                                                    </button>
+                                                    <Show when=is_pending_deletion_for_show>
+                                                        <span class="bg-black text-white text-[10px] font-bold px-2 py-0.5 uppercase">"Confirm?"</span>
+                                                    </Show>
                                                 </div>
                                             }
                                         }
