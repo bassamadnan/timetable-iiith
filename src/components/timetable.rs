@@ -1,5 +1,7 @@
 use leptos::prelude::*;
+use web_sys;
 use crate::model::Course;
+use crate::model::FilterMode;
 
 const TIMESLOTS: &[(&str, &str)] = &[
     ("T1", "8:30 - 9:55"),
@@ -21,11 +23,14 @@ fn TimetableCell(
     hovered_course: Signal<Option<String>>,
     pending_deletion: Signal<Option<String>>,
     set_pending_deletion: WriteSignal<Option<String>>,
+    set_active_filter: WriteSignal<Option<FilterMode>>,
 ) -> impl IntoView {
+    let day_clone = day.clone();
+    let slot_clone = time_slot.clone();
     let courses = move || {
         selected_courses.get()
             .into_iter()
-            .filter(|c| c.day == day && c.slot == time_slot)
+            .filter(|c| c.day == day_clone && c.slot == slot_clone)
             .collect::<Vec<_>>()
     };
 
@@ -47,20 +52,31 @@ fn TimetableCell(
     let has_conflict_for_class = has_conflict.clone();
     let is_cell_hovered_for_class = is_cell_hovered.clone();
 
+    // Click handler for the container (empty space)
+    let d = day.clone();
+    let s = time_slot.clone();
+    let on_container_click = move |ev: web_sys::MouseEvent| {
+        // Only trigger if we aren't clicking strictly on a course (though stop_propagation in the child handles most of this)
+        set_active_filter.set(Some(FilterMode::Intersection(d.clone(), s.clone())));
+    };
+
     view! {
-        <div class=move || format!(
-            "relative min-h-[100px] p-2 border-2 border-black transition-all duration-200 flex flex-col gap-1 \
-            {}",
-            if has_conflict_for_class() {
-                "bg-[#FF6B6B]" 
-            } else if is_cell_hovered_for_class() {
-                "bg-black scale-105 z-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)]" // Special hover style
-            } else if is_occupied() {
-                "bg-[#A5B4FC] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1 cursor-pointer"
-            } else {
-                "bg-white hover:bg-gray-50"
-            }
-        )>
+        <div 
+            class=move || format!(
+                "relative min-h-[100px] p-2 border-2 border-black transition-all duration-200 flex flex-col gap-1 \
+                {}",
+                if has_conflict_for_class() {
+                    "bg-[#FF6B6B]" 
+                } else if is_cell_hovered_for_class() {
+                    "bg-black scale-105 z-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)]" // Special hover style
+                } else if is_occupied() {
+                    "bg-[#A5B4FC] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1 cursor-pointer"
+                } else {
+                    "bg-white hover:bg-gray-50 cursor-pointer hover:shadow-[inner_0_0_10px_rgba(0,0,0,0.1)]"
+                }
+            )
+            on:click=on_container_click
+        >
             <For
                 each=courses
                 key=|c| c.name.clone()
@@ -127,6 +143,7 @@ pub fn Timetable(
     #[prop(into)] hovered_course: Signal<Option<String>>,
     #[prop(into)] pending_deletion: Signal<Option<String>>,
     #[prop(into)] set_pending_deletion: WriteSignal<Option<String>>,
+    set_active_filter: WriteSignal<Option<FilterMode>>,
 ) -> impl IntoView {
     view! {
         <div class="overflow-x-auto pb-4">
@@ -137,8 +154,12 @@ pub fn Timetable(
                     // Header Row (Timeslots)
                     <div class="h-12 border-b-4 border-r-4 border-black bg-[#F3F4F6]"></div> // Empty corner cell
                     {TIMESLOTS.iter().map(|(code, time)| {
+                        let c = code.to_string();
                         view! {
-                            <div class="flex flex-col items-center justify-center p-2 bg-black text-white border-b-4 border-black">
+                            <div 
+                                class="flex flex-col items-center justify-center p-2 bg-black text-white border-b-4 border-black cursor-pointer hover:bg-gray-800 transition-colors"
+                                on:click=move |_| set_active_filter.set(Some(FilterMode::Slot(c.clone())))
+                            >
                                 <span class="font-black text-lg">{*code}</span>
                                 <span class="text-[10px] font-bold uppercase text-gray-300">{*time}</span>
                             </div>
@@ -147,10 +168,14 @@ pub fn Timetable(
 
                     // Days Rows
                     {DAYS.iter().map(|day| {
+                        let d = day.to_string();
                         view! {
                             <div class="contents group">
                                 // Day Label
-                                <div class="flex items-center justify-center p-4 bg-black text-white font-black uppercase text-sm tracking-wider border-r-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]">
+                                <div 
+                                    class="flex items-center justify-center p-4 bg-black text-white font-black uppercase text-sm tracking-wider border-r-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] cursor-pointer hover:bg-gray-800 transition-colors"
+                                    on:click=move |_| set_active_filter.set(Some(FilterMode::Day(d.clone())))
+                                >
                                     {*day}
                                 </div>
 
@@ -165,6 +190,7 @@ pub fn Timetable(
                                             hovered_course=hovered_course
                                             pending_deletion=pending_deletion
                                             set_pending_deletion=set_pending_deletion
+                                            set_active_filter=set_active_filter
                                         />
                                     }
                                 }).collect::<Vec<_>>()}

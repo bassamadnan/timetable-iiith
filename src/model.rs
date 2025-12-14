@@ -1,4 +1,11 @@
 use serde::{Deserialize, Serialize};
+
+#[derive(Clone, Debug, PartialEq)]
+pub enum FilterMode {
+    Day(String),
+    Slot(String),
+    Intersection(String, String), // Day, Slot
+}
 use std::collections::HashMap;
 
 pub type DaySchedule = HashMap<String, Vec<String>>;

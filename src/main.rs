@@ -2,18 +2,23 @@ mod model;
 mod components;
 
 use leptos::prelude::*;
-use leptos::mount::mount_to_body;
-use model::{TimetableData, TimetableExt, Course};
-use components::search::Search;
-use components::timetable::Timetable;
+use crate::model::{Course, TimetableData, TimetableExt, FilterMode};
+use crate::components::{
+    search::Search,
+    timetable::Timetable,
+    modal::CourseModal,
+};
+use console_log;
+use log::Level;
 
 fn main() {
     console_error_panic_hook::set_once();
+    let _ = console_log::init_with_level(Level::Debug);
     
     // Load and Parse Data
-    let json_data = include_str!("../data/data_s26.json");
-    let timetable: TimetableData = serde_json::from_str(json_data).expect("Failed to parse timetable data");
-    let initial_all_courses = timetable.flatten_courses();
+    let data_str = include_str!("../data/data_s26.json");
+    let timetable_data: TimetableData = serde_json::from_str(data_str).unwrap();
+    let initial_all_courses = timetable_data.flatten_courses();
 
     mount_to_body(move || {
         // State
@@ -21,6 +26,7 @@ fn main() {
         let (selected_courses, set_selected_courses) = signal(Vec::<Course>::new());
         let (hovered_course, set_hovered_course) = signal(Option::<String>::None);
         let (pending_deletion, set_pending_deletion) = signal(Option::<String>::None);
+        let (active_filter, set_active_filter) = signal(Option::<FilterMode>::None);
 
         // Global Conflict Detection
         let conflicts = move || {
@@ -43,16 +49,21 @@ fn main() {
                 class="min-h-screen bg-[#E0E7FF] font-mono p-4 md:p-8 text-black selection:bg-black selection:text-[#E0E7FF]"
                 on:click=move |_| set_pending_deletion.set(None)
             >
+                <CourseModal 
+                    all_courses=all_courses 
+                    selected_courses=selected_courses
+                    set_selected_courses=set_selected_courses
+                    active_filter=active_filter
+                    set_active_filter=set_active_filter
+                />
                 
                 <div class="max-w-7xl mx-auto flex flex-col gap-8">
                     // Header
-                    <div class="bg-[#A5B4FC] border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-                        <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4">
-                            "Timetable" <span class="text-white text-stroke-black">"IIITH"</span>
+                    // Header
+                    <div class="bg-[#A5B4FC] border-4 border-black p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
+                        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter">
+                            "IIITH" <span class="text-white text-stroke-black">"-S26"</span>
                         </h1>
-                        <p class="text-xl font-bold bg-white inline-block px-4 py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                            "NO-NONSENSE SCHEDULING"
-                        </p>
                     </div>
 
                     // Search Section
@@ -76,6 +87,7 @@ fn main() {
                                 hovered_course=hovered_course
                                 pending_deletion=pending_deletion
                                 set_pending_deletion=set_pending_deletion
+                                set_active_filter=set_active_filter
                             />
                         </div>
 
