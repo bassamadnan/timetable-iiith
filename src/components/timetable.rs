@@ -88,11 +88,19 @@ fn TimetableCell(
                     "bg-white hover:bg-gray-50 cursor-pointer hover:shadow-[inner_0_0_10px_rgba(0,0,0,0.1)]"
                 }
             )
-            on:click=on_container_click
+                on:click=on_container_click
         >
-            <div class="w-full h-full flex flex-col">
+            <div class="w-full h-full flex flex-col relative">
                 <For
-                    each=courses
+                    each=move || {
+                        let mut sorted = courses(); 
+                        sorted.sort_by_key(|c| match c.duration {
+                            CourseDuration::H1 => 1,
+                            CourseDuration::Full => 2,
+                            CourseDuration::H2 => 3,
+                        });
+                        sorted
+                    }
                     key=|c| c.name.clone()
                     children=move |course| {
                         let course_name = course.name.clone();
@@ -103,26 +111,25 @@ fn TimetableCell(
                         let is_pending_deletion_for_show = is_pending_deletion.clone();
                         let click_name = course.name.clone();
                         
-                        let duration_badge = match course.duration {
-                            CourseDuration::Full => None,
-                            CourseDuration::H1 => Some("H1"),
-                            CourseDuration::H2 => Some("H2"),
+                        let (duration_badge, height_class) = match course.duration {
+                            CourseDuration::Full => (None, "h-full"),
+                            CourseDuration::H1 => (Some("H1"), "h-[49%] mb-auto"),
+                            CourseDuration::H2 => (Some("H2"), "h-[49%] mt-auto"),
                         };
 
                         view! {
                             <div 
                                 class=move || format!(
-                                    "flex-1 w-full min-h-0 text-xs font-bold border-black p-1 leading-tight break-words transition-colors cursor-pointer select-none flex flex-col justify-center relative overflow-hidden group/item {}",
+                                    "w-full flex-none relative group/item transition-all duration-200 cursor-pointer select-none overflow-hidden flex flex-col justify-center px-1 py-1 {} {}",
+                                    height_class,
                                     if is_pending_deletion() {
-                                        "bg-[#FF6B6B] text-white animate-pulse z-20 border"
+                                        "bg-red-50 border-2 border-red-500"
                                     } else if is_this_hovered() { 
-                                        "bg-[#FEF08A] text-black z-10 border" 
+                                        "bg-yellow-50 border-2 border-black" 
                                     } else { 
-                                        "bg-transparent text-black hover:bg-red-50"
+                                        "bg-white hover:bg-red-50 border-2 border-black"
                                     }
                                 )
-                                style="border-bottom: 1px solid black;" 
-                                // Note: We might want last-child border-bottom-0, but explicit style/class logic is safer for dynamic lists
                                 on:click=move |ev| {
                                     ev.stop_propagation();
                                     let name = click_name.clone();
@@ -136,21 +143,23 @@ fn TimetableCell(
                                     }
                                 }
                             >
-                                // Content Container
-                                <div class="flex flex-col gap-0.5 relative z-10">
+                                // Badge & Text Container
+                                <div class="flex flex-col relative z-10 h-full justify-center">
                                     <Show when=move || duration_badge.is_some()>
-                                        <span class="text-[8px] bg-black text-white w-fit px-1 rounded-sm mb-0.5">{duration_badge.unwrap()}</span>
+                                        <div class="absolute top-0 right-0 bg-black text-white text-[8px] font-bold px-1 py-0.5 pointer-events-none">
+                                            {duration_badge.unwrap()}
+                                        </div>
                                     </Show>
-                                    <span class="line-clamp-3 text-[10px] sm:text-xs leading-tight">
+                                    <span class="line-clamp-3 text-[10px] font-bold text-black leading-tight pr-1">
                                         {course.name.clone()}
                                     </span>
                                 </div>
 
                                 // Deletion Overlay
                                 <Show when=is_pending_deletion_for_show>
-                                    <div class="absolute inset-0 flex items-center justify-center bg-[#FF6B6B]/90 backdrop-blur-[1px] z-30">
-                                        <span class="text-[10px] font-black uppercase text-white tracking-widest border-2 border-white px-1 py-0.5 rotate-[-5deg] shadow-sm">
-                                            "Confirm"
+                                    <div class="absolute inset-0 flex items-center justify-center bg-red-100/90 backdrop-blur-[1px] z-30 transition-opacity">
+                                        <span class="text-[10px] font-bold uppercase text-red-600 tracking-wider bg-white px-2 py-1 border-2 border-red-500 shadow-sm">
+                                            "Delete?"
                                         </span>
                                     </div>
                                 </Show>

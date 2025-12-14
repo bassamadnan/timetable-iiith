@@ -170,9 +170,9 @@ fn main() {
                                                         }
                                                     }
                                                 >
-                                                    <span class="font-bold text-sm truncate pr-2">{c.name}</span>
+                                                    <span class="font-bold text-sm pr-2">{c.name}</span>
                                                     <Show when=is_pending_deletion_for_show>
-                                                        <span class="bg-black text-white text-[10px] font-bold px-2 py-0.5 uppercase">"Confirm?"</span>
+                                                        <span class="bg-black text-white text-[10px] font-bold px-2 py-0.5 uppercase">"Delete?"</span>
                                                     </Show>
                                                 </div>
                                             }
