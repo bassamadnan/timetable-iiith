@@ -1,0 +1,11 @@
+[build]
+target = "index.html"
+dist = "dist"
+
+[[hooks]]
+stage = "pre_build"
+command = "sh"
+command_arguments = ["-c", "./node_modules/.bin/tailwindcss -i input.css -o tailwind_output.css"]
+
+[watch]
+ignore = ["./legacy_frontend", "./dist"]
