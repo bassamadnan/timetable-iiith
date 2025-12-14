@@ -58,6 +58,14 @@ impl TimetableExt for TimetableData {
                 }
             }
         }
+        
+        // Sort deterministically to ensure stable indices for share URLs
+        courses.sort_by(|a, b| {
+            a.name.cmp(&b.name)
+                .then_with(|| a.day.cmp(&b.day))
+                .then_with(|| a.slot.cmp(&b.slot))
+        });
+        
         courses
     }
 }

@@ -12,8 +12,8 @@ use crate::components::{
 use console_log;
 use log::Level;
 
-
 use crate::config::{DEFAULT_SEMESTER, AVAILABLE_SEMESTERS};
+use gloo_timers::callback::Timeout;
 
 fn main() {
     console_error_panic_hook::set_once();
@@ -38,32 +38,101 @@ fn main() {
 
     mount_to_body(move || {
         // App State
-        let (current_semester, set_current_semester) = signal(DEFAULT_SEMESTER.to_string());
+        // 1. Parse URL State
+        let window = web_sys::window().unwrap();
+        let location = window.location();
+        let search = location.search().unwrap_or_default();
+        let params = web_sys::UrlSearchParams::new_with_str(&search)
+            .ok()
+            .unwrap_or_else(|| web_sys::UrlSearchParams::new().unwrap());
+        
+        let url_sem = params.get("s");
+        let url_courses = params.get("c");
+
+        // Determine Initial Semester
+        let initial_sem = url_sem.unwrap_or_else(|| DEFAULT_SEMESTER.to_string());
+        
+        let (current_semester, set_current_semester) = signal(initial_sem.clone());
         let (show_semester_modal, set_show_semester_modal) = signal(false);
+        let (share_status, set_share_status) = signal("SELECTED COURSES".to_string());
 
         // Derived State for Data
-        // When current_semester changes, re-fetch and flatten courses
         let current_data = Memo::new(move |_| {
             let sem = current_semester.get();
             get_data(&sem).flatten_courses()
         });
         
-        // Main Course State
-        // We sync strict signal to the memo, or just use the memo?
-        // Components expect Signal<Vec<Course>>. Memo implements Signal implicitly or via .into().
-        // BUT set_selected_courses needs to clear on switch.
+        // Determine Initial Selected Courses
+        let initial_selected = if let Some(c_str) = url_courses {
+            let all = current_data.get_untracked();
+            c_str.split(',')
+                .filter_map(|s| s.parse::<usize>().ok())
+                .filter_map(|idx| all.get(idx).cloned())
+                .collect()
+        } else {
+            Vec::new()
+        };
         
-        let (selected_courses, set_selected_courses) = signal(Vec::<Course>::new());
+        // Main Course State
+        let (selected_courses, set_selected_courses) = signal(initial_selected);
         let (hovered_course, set_hovered_course) = signal(Option::<String>::None);
         let (pending_deletion, set_pending_deletion) = signal(Option::<String>::None);
         let (active_filter, set_active_filter) = signal(Option::<FilterMode>::None);
 
-        // Effect to clear selection when semester changes
+        // Effect to clear selection when semester changes (only if not initial load?)
+        // We need to distinguish between user switch and initial load.
+        // Actually, initial load sets the signal. The effect tracks changes.
+        // But effect runs once immediately. We should check if value changed?
+        // standard Leptos Effect runs immediately.
+        // We can use `create_effect` with a tracker that ignores first run?
+        // Or just store "is_initialized" ref.
+        let is_init = StoredValue::new(true);
+        
         Effect::new(move |_| {
-            current_semester.track(); // Track change
-            set_selected_courses.set(Vec::new()); // Clear selection
-            set_pending_deletion.set(None);
+            let sem = current_semester.get();
+            if !is_init.get_value() {
+                set_selected_courses.set(Vec::new()); // Clear if user switched manually
+                set_pending_deletion.set(None);
+            } else {
+                is_init.set_value(false);
+            }
         });
+
+        // Share Logic
+        let on_share = move |_| {
+            let sem = current_semester.get_untracked();
+            let selected = selected_courses.get_untracked();
+            let all = current_data.get_untracked();
+            
+            // Map selected courses to indices in 'all'
+            // We assume 'all' is stable (sorted by name/id internally in flatten_courses?)
+            // flatten_courses structure: iterate days, slots, sort? 
+            // We should ensure flatten_courses is deterministic. It iterates Vecs. If JSON order is stable, it's fine.
+            // But to be safe, we might match by Name? Index is shorter.
+            // Let's rely on index for now, assuming static data.
+            
+            let indices: Vec<String> = selected.iter()
+                .filter_map(|c| all.iter().position(|x| x.name == c.name).map(|i| i.to_string()))
+                .collect();
+            
+            let courses_param = indices.join(",");
+            
+            // Construct URL using current href base (preserves path like /timetable-iiith/)
+            let href = window.location().href().unwrap_or_default();
+            let base_url = href.split('?').next().unwrap_or_default();
+            // Remove trailing slash if present to avoid double slash with query? 
+            // Query usually starts with ?, so base ending with / is fine. e.g. /app/?s=...
+            // If base is /app, we want /app?s=...
+            
+            let url = format!("{}?s={}&c={}", base_url, sem, courses_param);
+            
+            let navigator = window.navigator();
+            // web-sys types navigator.clipboard() as Clipboard (not Option)
+            let clipboard = navigator.clipboard();
+            let _ = clipboard.write_text(&url);
+            set_share_status.set("COPIED TO CLIPBOARD!".to_string());
+            Timeout::new(2000, move || set_share_status.set("SELECTED".to_string())).forget();
+        };
 
         // Global Conflict Detection
         let conflicts = move || {
@@ -215,7 +284,28 @@ fn main() {
 
                             // Selected Courses Panel
                             <div class="bg-[#FEF08A] border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-                                <h3 class="text-2xl font-black uppercase mb-4">"Selected"</h3>
+                                <div 
+                                    class="flex items-center justify-between mb-4 cursor-pointer group select-none"
+                                    on:click=on_share
+                                >
+                                    <h3 class="text-2xl font-black uppercase">"Selected"</h3>
+                                    <div 
+                                        class=move || format!(
+                                            "border-2 border-black px-3 py-1 text-sm font-bold uppercase transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 active:translate-x-1 active:translate-y-1 opacity-0 group-hover:opacity-100 {}",
+                                            if share_status.get().contains("COPIED") {
+                                                "bg-[#86efac] opacity-100" // Stay visible if copied
+                                            } else {
+                                                "bg-white"
+                                            }
+                                        )
+                                    >
+                                        {move || if share_status.get().contains("COPIED") {
+                                            "COPIED! ✓"
+                                        } else {
+                                            "GET LINK 🔗"
+                                        }}
+                                    </div>
+                                </div>
                                 <div class="flex flex-col gap-3">
                                     <For
                                         each=move || selected_courses.get()
