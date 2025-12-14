@@ -26,6 +26,9 @@ fn levenshtein(s1: &str, s2: &str) -> usize {
     d[len1][len2]
 }
 
+use gloo_timers::callback::Interval;
+use crate::components::facts::{get_facts, TYPING_SPEED_MS, PAUSE_MS};
+
 #[component]
 pub fn Search(
     #[prop(into)] all_courses: Signal<Vec<Course>>,
@@ -35,6 +38,59 @@ pub fn Search(
     let (query, set_query) = signal(String::new());
     let (is_focused, set_is_focused) = signal(false);
     let input_ref = NodeRef::<leptos::html::Input>::new();
+
+    // Typewriter Animation State
+    let (placeholder, set_placeholder) = signal("".to_string());
+    
+    // Animation Logic
+    Effect::new(move |_| {
+        let hints = get_facts();
+
+        let mut current_hint_idx = 0;
+        let mut char_idx = 0;
+        let mut is_deleting = false;
+        let mut pause_counter = 0;
+
+        let interval = Interval::new(TYPING_SPEED_MS, move || {
+            // Stop animation if focused or query exists
+            if is_focused.get_untracked() || !query.get_untracked().is_empty() {
+                if placeholder.get_untracked() != "SEARCH COURSES..." {
+                     set_placeholder.set("SEARCH COURSES...".to_string());
+                }
+                return;
+            }
+
+            let current_hint = hints[current_hint_idx];
+
+            if is_deleting {
+                if char_idx > 0 {
+                    char_idx -= 1;
+                    set_placeholder.set(current_hint[..char_idx].to_string());
+                } else {
+                    is_deleting = false;
+                    current_hint_idx = (current_hint_idx + 1) % hints.len();
+                }
+            } else {
+                if char_idx < current_hint.len() {
+                    char_idx += 1;
+                    set_placeholder.set(current_hint[..char_idx].to_string());
+                } else {
+                    // Calculate ticks dynamically based on config
+                    let required_ticks = PAUSE_MS / TYPING_SPEED_MS;
+                    
+                    if pause_counter < required_ticks { 
+                        pause_counter += 1;
+                    } else {
+                        is_deleting = true;
+                        pause_counter = 0;
+                    }
+                }
+            }
+        });
+
+        // Keep interval alive as long as component exists
+        interval.forget();
+    });
 
     // Global Keydown Listener
     let _ = window_event_listener(leptos::ev::keydown, move |ev: web_sys::KeyboardEvent| {
@@ -47,11 +103,15 @@ pub fn Search(
             }
         }
 
-        if key.len() == 1 {
+        if key.len() == 1 || key == "/" {
             if let Some(input) = input_ref.get() {
                 input.focus().unwrap_or_default();
-                ev.prevent_default();
-                set_query.update(|q| q.push_str(&key));
+                if key != "/" {
+                     ev.prevent_default();
+                     set_query.update(|q| q.push_str(&key));
+                } else {
+                    ev.prevent_default(); // Just focus on '/'
+                }
                 set_is_focused.set(true);
             }
         }
@@ -90,10 +150,6 @@ pub fn Search(
                         }
                         
                         // 2. Fuzzy Prefix Match
-                        // We check prefixes of c_tok that are similar in length to q_tok
-                        // e.g. q_tok="qan" (len 3), c_tok="quantum".
-                        // Check prefixes of len 2, 3, 4, 5...
-                        
                         let min_len = q_tok.len().saturating_sub(1).max(1);
                         let max_len = (q_tok.len() + 2).min(c_tok.len());
                         
@@ -104,15 +160,12 @@ pub fn Search(
                                 best_tok_score = best_tok_score.min(dist);
                             }
                         } else if c_tok.len() < min_len {
-                            // If course word is shorter than query word (minus 1), just compare directly
                              let dist = levenshtein(q_tok, c_tok);
                              best_tok_score = best_tok_score.min(dist);
                         }
                     }
                     
                     // Threshold logic
-                    // Short query words (<=3 chars) need tight match (dist <= 1)
-                    // Longer words allow more slack
                     let threshold = if q_tok.len() <= 3 { 1 } else { 2 };
                     
                     if best_tok_score > threshold {
@@ -168,7 +221,7 @@ pub fn Search(
                     node_ref=input_ref
                     type="text"
                     class="w-full px-6 py-4 text-xl font-bold bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] focus:translate-x-[-2px] focus:translate-y-[-2px] placeholder-gray-500 outline-none transition-all duration-200 uppercase"
-                    placeholder="SEARCH COURSES..."
+                    prop:placeholder=placeholder
                     prop:value=query
                     on:input=move |ev| {
                         set_query.set(event_target_value(&ev));
