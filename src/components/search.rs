@@ -27,7 +27,7 @@ fn levenshtein(s1: &str, s2: &str) -> usize {
 }
 
 use gloo_timers::callback::Interval;
-use crate::components::facts::{get_facts, TYPING_SPEED_MS, PAUSE_MS};
+use crate::config::{get_facts, TYPING_SPEED_MS, PAUSE_MS};
 
 #[component]
 pub fn Search(

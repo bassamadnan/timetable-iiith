@@ -1,5 +1,6 @@
 mod model;
 mod components;
+mod config;
 
 use leptos::prelude::*;
 use crate::model::{Course, TimetableData, TimetableExt, FilterMode, CourseDuration};
@@ -11,22 +12,58 @@ use crate::components::{
 use console_log;
 use log::Level;
 
+
+use crate::config::{DEFAULT_SEMESTER, AVAILABLE_SEMESTERS};
+
 fn main() {
     console_error_panic_hook::set_once();
     let _ = console_log::init_with_level(Level::Debug);
     
-    // Load and Parse Data
-    let data_str = include_str!("../data/data_s26.json");
-    let timetable_data: TimetableData = serde_json::from_str(data_str).unwrap();
-    let initial_all_courses = timetable_data.flatten_courses();
+    // Embed All Data Sets
+    // Construct a map of "S26" -> (Raw JSON, Parsed Data lazy loaded? No, eager parse is fine for 4 small files)
+    // Actually, to keep it simple and compile-time safe, we'll parse on demand when switching? 
+    // Or just parse all 4 at start? They are small.
+    
+    // We'll use a match expression in a helper function to get the data
+    let get_data = |semester: &str| -> TimetableData {
+        let json = match semester {
+            "S26" => include_str!("../data/data_s26.json"),
+            "M25" => include_str!("../data/data_m25.json"),
+            "S25" => include_str!("../data/data_s25.json"),
+            "M24" => include_str!("../data/data_m24.json"),
+            _ => include_str!("../data/data_s26.json"), // Fallback
+        };
+        serde_json::from_str(json).unwrap()
+    };
 
     mount_to_body(move || {
-        // State
-        let (all_courses, _) = signal(initial_all_courses.clone());
+        // App State
+        let (current_semester, set_current_semester) = signal(DEFAULT_SEMESTER.to_string());
+        let (show_semester_modal, set_show_semester_modal) = signal(false);
+
+        // Derived State for Data
+        // When current_semester changes, re-fetch and flatten courses
+        let current_data = Memo::new(move |_| {
+            let sem = current_semester.get();
+            get_data(&sem).flatten_courses()
+        });
+        
+        // Main Course State
+        // We sync strict signal to the memo, or just use the memo?
+        // Components expect Signal<Vec<Course>>. Memo implements Signal implicitly or via .into().
+        // BUT set_selected_courses needs to clear on switch.
+        
         let (selected_courses, set_selected_courses) = signal(Vec::<Course>::new());
         let (hovered_course, set_hovered_course) = signal(Option::<String>::None);
         let (pending_deletion, set_pending_deletion) = signal(Option::<String>::None);
         let (active_filter, set_active_filter) = signal(Option::<FilterMode>::None);
+
+        // Effect to clear selection when semester changes
+        Effect::new(move |_| {
+            current_semester.track(); // Track change
+            set_selected_courses.set(Vec::new()); // Clear selection
+            set_pending_deletion.set(None);
+        });
 
         // Global Conflict Detection
         let conflicts = move || {
@@ -57,20 +94,70 @@ fn main() {
                 on:click=move |_| set_pending_deletion.set(None)
             >
                 <CourseModal 
-                    all_courses=all_courses 
+                    all_courses=current_data 
                     selected_courses=selected_courses
                     set_selected_courses=set_selected_courses
                     active_filter=active_filter
                     set_active_filter=set_active_filter
                 />
                 
+                // Semester Selection Modal
+                <Show when=move || show_semester_modal.get()>
+                    <div class="fixed inset-0 z-[100] flex items_center justify-center p-4">
+                        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" on:click=move |_| set_show_semester_modal.set(false)></div>
+                        <div class="relative bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 max-w-md w-full animate-in zoom-in-95 duration-200">
+                            <h2 class="text-3xl font-black uppercase mb-6 text-center">"Select Semester"</h2>
+                            <div class="grid grid-cols-2 gap-4">
+                                {AVAILABLE_SEMESTERS.iter().map(|(label, _)| {
+                                    let label_str = label.to_string();
+                                    let label_for_active = label_str.clone();
+                                    let label_for_click = label_str.clone();
+                                    
+                                    let is_active = move || current_semester.get() == label_for_active;
+                                    view! {
+                                        <button
+                                            class=move || format!(
+                                                "p-4 border-4 border-black font-black text-xl uppercase transition-all active:translate-y-1 active:shadow-none {}",
+                                                if is_active() {
+                                                    "bg-black text-white shadow-none translate-y-1"
+                                                } else {
+                                                    "bg-white hover:bg-[#A5B4FC] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
+                                                }
+                                            )
+                                            on:click=move |_| {
+                                                set_current_semester.set(label_for_click.clone());
+                                                set_show_semester_modal.set(false);
+                                            }
+                                        >
+                                            {label_str}
+                                        </button>
+                                    }
+                                }).collect_view()}
+                            </div>
+                        </div>
+                    </div>
+                </Show>
+
                 <div class="max-w-7xl mx-auto flex flex-col gap-8">
                     // Header
-                    // Header
-                    <div class="bg-[#A5B4FC] border-4 border-black p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
-                        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter">
-                            "Timetable" <span class="text-white text-stroke-black">"-S26"</span>
+                    <div 
+                        class="bg-[#A5B4FC] border-4 border-black p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center cursor-pointer hover:bg-[#818CF8] transition-colors group relative"
+                        on:click=move |ev| {
+                            ev.stop_propagation();
+                            set_show_semester_modal.set(true);
+                        }
+                    >
+                        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter flex items-center gap-2">
+                            "Timetable" 
+                            <span class="text-white text-stroke-black px-2 relative">
+                                {"-"} {move || current_semester.get()}
+                            </span>
                         </h1>
+                        
+                        // Tooltip hint
+                        <span class="absolute -bottom-3 left-1/2 -translate-x-1/2 text-[10px] text-black bg-white border-2 border-black px-2 py-0.5 font-bold uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            "CLICK TO CHANGE"
+                        </span>
                     </div>
 
                     // Search Section
@@ -79,7 +166,7 @@ fn main() {
                         on:click=move |ev| ev.stop_propagation()
                     >
                         <Search 
-                            all_courses=all_courses 
+                            all_courses=current_data 
                             selected_courses=selected_courses
                             set_selected=set_selected_courses 
                         />
