@@ -14,6 +14,7 @@ use log::Level;
 
 use crate::config::{DEFAULT_SEMESTER, AVAILABLE_SEMESTERS};
 use gloo_timers::callback::Timeout;
+use wasm_bindgen::JsValue;
 
 fn main() {
     console_error_panic_hook::set_once();
@@ -50,7 +51,7 @@ fn main() {
         let url_courses = params.get("c");
 
         // Determine Initial Semester
-        let initial_sem = url_sem.unwrap_or_else(|| DEFAULT_SEMESTER.to_string());
+        let initial_sem = url_sem.clone().unwrap_or_else(|| DEFAULT_SEMESTER.to_string());
         
         let (current_semester, set_current_semester) = signal(initial_sem.clone());
         let (show_semester_modal, set_show_semester_modal) = signal(false);
@@ -63,7 +64,7 @@ fn main() {
         });
         
         // Determine Initial Selected Courses
-        let initial_selected = if let Some(c_str) = url_courses {
+        let initial_selected = if let Some(c_str) = &url_courses {
             let all = current_data.get_untracked();
             c_str.split(',')
                 .filter_map(|s| s.parse::<usize>().ok())
@@ -72,6 +73,12 @@ fn main() {
         } else {
             Vec::new()
         };
+
+        // Clean URL if params were present
+        if url_courses.is_some() || url_sem.is_some() {
+            let pathname = window.location().pathname().unwrap_or_default();
+            let _ = window.history().unwrap().replace_state_with_url(&JsValue::NULL, "", Some(&pathname));
+        }
         
         // Main Course State
         let (selected_courses, set_selected_courses) = signal(initial_selected);
@@ -326,25 +333,27 @@ fn main() {
                             // Selected Courses Panel
                             <div class="bg-[var(--accent-2)] border-4 border-[var(--border-main)] p-6 shadow-[8px_8px_0px_0px_var(--shadow-main)]">
                                 <div 
-                                    class="flex items-center justify-between mb-4 cursor-pointer group select-none"
+                                    class="flex items-center justify-between mb-4 cursor-pointer group select-none transition-all"
                                     on:click=on_share
                                 >
                                     <h3 class="text-2xl font-black uppercase text-black">"Selected"</h3>
-                                    <div 
-                                        class=move || format!(
-                                            "border-2 border-[var(--border-main)] px-3 py-1 text-sm font-bold uppercase transition-all shadow-[4px_4px_0px_0px_var(--shadow-main)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 active:translate-x-1 active:translate-y-1 opacity-0 group-hover:opacity-100 text-black {}",
-                                            if share_status.get().contains("COPIED") {
-                                                "bg-[var(--accent-3)] opacity-100" // Stay visible if copied
+                                    <div class="flex items-center gap-3">
+                                        <div 
+                                            class=move || format!(
+                                                "border-2 border-[var(--border-main)] px-3 py-1 text-sm font-bold uppercase transition-all shadow-[4px_4px_0px_0px_var(--shadow-main)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 active:translate-x-1 active:translate-y-1 text-black {}",
+                                                if share_status.get().contains("COPIED") {
+                                                    "bg-[var(--accent-3)]"
+                                                } else {
+                                                    "bg-[var(--bg-card)]"
+                                                }
+                                            )
+                                        >
+                                            {move || if share_status.get().contains("COPIED") {
+                                                "COPIED! ✓"
                                             } else {
-                                                "bg-[var(--bg-card)]"
-                                            }
-                                        )
-                                    >
-                                        {move || if share_status.get().contains("COPIED") {
-                                            "COPIED! ✓"
-                                        } else {
-                                            "GET LINK 🔗"
-                                        }}
+                                                "GET LINK 🔗"
+                                            }}
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="flex flex-col gap-3">
@@ -413,6 +422,18 @@ fn main() {
                                                 "No courses selected."
                                             }}
                                         </div>
+                                    </Show>
+                                    <Show when=move || !selected_courses.get().is_empty()>
+                                        <button
+                                            class="w-full border-2 border-[var(--border-main)] py-2 text-sm font-black uppercase transition-all shadow-[4px_4px_0px_0px_var(--shadow-main)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 active:translate-x-1 active:translate-y-1 bg-[var(--bg-card)] hover:bg-[var(--accent-danger)] hover:text-white text-[var(--accent-danger)] mt-2"
+                                            on:click=move |ev| {
+                                                ev.stop_propagation();
+                                                set_selected_courses.set(Vec::new());
+                                                set_pending_deletion.set(None);
+                                            }
+                                        >
+                                            "Clear All"
+                                        </button>
                                     </Show>
                                 </div>
                             </div>
