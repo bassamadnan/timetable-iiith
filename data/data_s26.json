@@ -37,7 +37,7 @@
     ],
     "T4": [
       "Intro to Human Sciences (UG2 CSE/D) (Sec B)",
-      "Science II (UG3 ECE/D, LED, CLD & CHD) (Sec B)",
+      "Science II (UG3 ECE/D, LED & CHD) (Sec B)",
       "Basics of Ethics (H1/H2)",
       "Differential Equations",
       "Learning and Memory",
@@ -57,7 +57,10 @@
       "Law, Technology and Digital Governance",
       "Flexible Electronics"
     ],
-    "T6": ["Growth and Development", "Critical Viewing and Reading"]
+    "T6": [
+      "Growth and Development",
+      "Critical Viewing and Reading"
+    ]
   },
   "Tuesday": {
     "T1": [
@@ -115,7 +118,7 @@
       "Analysis and Design of Bridge Infrastructure"
     ],
     "T4": [
-      "Science II (UG2 CSE/D) (Sec A)",
+      "Science II (UG2 CSE/D, UG3 CLD) (Sec A)",
       "Distributed Systems",
       "Information-Theoretic Methods in Computer Science",
       "Hydro Informatics & Climate Sciences",
@@ -165,10 +168,15 @@
       "Sociology of Platform Economies",
       "Digital Democracy and Data Governance in the European Union",
       "Gender, Culture and Representation",
-      "Product Design Workshop"
+      "Product Design Workshop",
+      "Arts-2 (H1&H2)"
     ],
-    "T3": ["Value Education-II (H)"],
-    "T4": ["Science Lab II (H) (2:00 to 5:00 PM)"],
+    "T3": [
+      "Value Education-II (H)"
+    ],
+    "T4": [
+      "Science Lab II (H) (2:00 to 5:00 PM)"
+    ],
     "T5": [],
     "T6": []
   }
