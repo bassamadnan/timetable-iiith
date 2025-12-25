@@ -24,6 +24,7 @@
     ],
     "T3": [
       "Intro to Human Sciences (UG2 ECE/D, CLD, CGD & UG3 CND) (Sec A)",
+      "Computing in Sciences II (H2)",
       "Introduction to Spatial Sciences & Technology(H2)",
       "Organic Chemistry (H2)",
       "Information & Communication",
@@ -45,6 +46,7 @@
       "Art, Vision, & Feelings (H2)",
       "Computational Psycholinguistics",
       "Disaster Management",
+      "Topics in Discrete Mathematics",
       "Linear Partial Differential Equations and Variational Calculus",
       "Thermodynamics (H1)"
     ],
@@ -70,11 +72,9 @@
       "Research Methods in Human Sciences",
       "Intro to VLSI and Embedded Systems (H1)",
       "Introduction to Statistical Signal Processing (H2)",
-      "Computing in Sciences II (H2)",
       "Molecular Modeling and Simulations",
       "Mathematical Methods in Sciences",
       "The Universe Across Scales",
-      "Molecular Symmetry and Quantum Mechanics",
       "Product Lifecycle Management",
       "Topics in Physics"
     ],
@@ -95,16 +95,16 @@
       "Analog IC Design",
       "Cognitive Neuroscience",
       "Computing Tools",
-      "Analysis & Design of Precast and Prestressed Structures",
       "Earthquake Engineering",
       "Instrumentation and Devices",
-      "Engineering Virtual Reality Systems (H)"
+      "Engineering Virtual Reality Systems (H)",
+      "Electronics Workshop II (10:00 AM to 1:00 PM)"
     ],
     "T3": [
       "Linear Algebra (Section A, B&C)",
       "Language Typology and Universals",
       "Linguistic Data 3: Data Modeling in ILs (H1)",
-      "Numerical Algorithms (H2)",
+      "Numerical Algorithms (H1)",
       "Geospatial for Sustainable Development",
       "Language and Power (H1)",
       "Ethics and the Digital Society (H1)",
@@ -112,7 +112,6 @@
       "Literature and the Ethics of telling a Story (H2)",
       "Ethics in Research (H2)",
       "Constitutional Ethics (H2)",
-      "Topics in Discrete Mathematics",
       "Evaluation Methods for NLP (H2)",
       "Continuous Variable Quantum Information Theory and Computation",
       "Analysis and Design of Bridge Infrastructure"
@@ -127,12 +126,13 @@
       "Optical Remote Sensing",
       "Topics in SSMT",
       "Machine Learning for Communication",
-      "Internals of Application Servers",
       "Intro to Robotics: Perception and Planning (H1)",
       "Foundations of RF and Microwave Sensors (H2)",
       "NGS Data Analysis",
       "Compilers",
-      "Technology Product Entrepreneurship"
+      "Technology Product Entrepreneurship",
+      "Analysis & Design of Precast and Prestressed Structures",
+      "Science Lab II (H) (2:00 to 5:00 PM)"
     ],
     "T5": [
       "Software Programming for Performance (H1)",
@@ -148,9 +148,9 @@
     ],
     "T6": [
       "Principles of Information Security",
-      "The Mathematics of Information: Theory & Application (H1)",
       "Intro to UAV Design",
-      "Software Engineering"
+      "Software Engineering",
+      "Internals of Application Servers"
     ]
   },
   "Wednesday": {
@@ -159,6 +159,7 @@
       "Computer Graphics (H2)",
       "Information Security Audit and Assurance",
       "Quantum aspects of Cryptography",
+      "Molecular Symmetry and Quantum Mechanics",
       "Introduction to NLP"
     ],
     "T2": [
@@ -174,9 +175,7 @@
     "T3": [
       "Value Education-II (H)"
     ],
-    "T4": [
-      "Science Lab II (H) (2:00 to 5:00 PM)"
-    ],
+    "T4": [],
     "T5": [],
     "T6": []
   }
